@@ -14,10 +14,7 @@ import javax.swing.BorderFactory;
 public class Maza extends Comestible{
     
     public Maza() {
-        lblCadrado = new javax.swing.JLabel();
-        lblCadrado.setSize(TAMANO, TAMANO);
-        establecerPosicion();
-        cor();
+        super();
     }
     
     @Override

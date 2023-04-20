@@ -12,6 +12,14 @@ import Xogo.Cadrados.Cadrado;
  */
 public abstract class Comestible extends Cadrado{
     
+    public Comestible() {
+        lblCadrado = new javax.swing.JLabel();
+        lblCadrado.setSize(TAMANO, TAMANO);
+        establecerPosicion();
+        cor();
+    }
+    
+    
     @Override
     protected void establecerPosicion() {
         setCoordX((int) (Math.floor(Math.random() * (18 - 0 + 1) + 0)*50));
