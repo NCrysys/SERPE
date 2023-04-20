@@ -8,6 +8,7 @@ import InterfaceGrafica.Interface;
 import Xogo.Cadrados.Serpe;
 import Xogo.Cadrados.Comestibles.Bomba;
 import Xogo.Cadrados.Comestibles.Comestible;
+import Xogo.Cadrados.Comestibles.Maza;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Xogo {
     public Xogo(Interface interfaz) {
         this.interfaz = interfaz;
         serpe = new Serpe(this);
+        xerarFroita();
     }
     
     //GETTER E SETTER
@@ -96,5 +98,10 @@ public class Xogo {
         for (int i = 0; i < serpe.getCorpo().size(); i++) {
             interfaz.pintarCadrado(serpe.getCorpo().get(i));
         }
+    }
+    
+    public void xerarFroita(){
+        froita = new Maza();
+        interfaz.pintarCadrado(froita);
     }
 }

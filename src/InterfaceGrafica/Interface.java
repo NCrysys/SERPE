@@ -37,6 +37,7 @@ public class Interface extends javax.swing.JFrame {
     private void initComponents() {
 
         panelXogo = new javax.swing.JPanel();
+        imagen = new javax.swing.JLabel();
         pantallaInicial = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         bIniciar = new javax.swing.JButton();
@@ -48,7 +49,6 @@ public class Interface extends javax.swing.JFrame {
 
         panelXogo.setVisible(false);
         panelXogo.setBackground(new java.awt.Color(182, 255, 182));
-        panelXogo.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(80, 40, 0))));
         panelXogo.setMaximumSize(new java.awt.Dimension(900, 900));
         panelXogo.setMinimumSize(new java.awt.Dimension(900, 900));
         panelXogo.setPreferredSize(new java.awt.Dimension(900, 900));
@@ -58,15 +58,25 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        imagen.setLocation(0, 0);
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/TableroSerpe.jpg"))); // NOI18N
+        imagen.setMaximumSize(new java.awt.Dimension(900, 900));
+        imagen.setMinimumSize(new java.awt.Dimension(900, 900));
+        imagen.setPreferredSize(new java.awt.Dimension(900, 900));
+
         javax.swing.GroupLayout panelXogoLayout = new javax.swing.GroupLayout(panelXogo);
         panelXogo.setLayout(panelXogoLayout);
         panelXogoLayout.setHorizontalGroup(
             panelXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
+            .addGroup(panelXogoLayout.createSequentialGroup()
+                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelXogoLayout.setVerticalGroup(
             panelXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
+            .addGroup(panelXogoLayout.createSequentialGroup()
+                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pantallaInicial.setBackground(new java.awt.Color(182, 255, 182));
@@ -220,12 +230,14 @@ public class Interface extends javax.swing.JFrame {
         });
     }
     /**
-     * Pinta no panelXogo a label do cadrado que lle pasan.
+     * Pinta no panelXogo a label do cadrado que lle pasan
+     * e pon a label da imaxe por debaixo dos demais componentes do panel.
      * @param cadrado 
      */
     public void pintarCadrado(Cadrado cadrado){
         panelXogo.add(cadrado.getLblCadrado());
         panelXogo.updateUI();
+        panelXogo.setComponentZOrder(imagen, panelXogo.getComponentCount()-1);
     }
     
     private void crearTimerXogo (int delay){
@@ -240,6 +252,7 @@ public class Interface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bIniciar;
+    private javax.swing.JLabel imagen;
     private javax.swing.JPanel panelXogo;
     private javax.swing.JPanel pantallaInicial;
     private javax.swing.JLabel titulo;

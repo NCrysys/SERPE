@@ -16,7 +16,6 @@ public class CadradoCorpo extends Cadrado{
     public CadradoCorpo() {
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
-        establecerPosicion();
         cor();
     }
     

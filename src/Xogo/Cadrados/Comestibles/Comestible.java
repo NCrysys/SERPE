@@ -11,8 +11,10 @@ import Xogo.Cadrados.Cadrado;
  * @author a22noellr
  */
 public abstract class Comestible extends Cadrado{
+    
     @Override
     protected void establecerPosicion() {
-        
+        setCoordX((int) (Math.floor(Math.random() * (18 - 0 + 1) + 0)*50));
+        setCoordY((int) (Math.floor(Math.random() * (18 - 0 + 1) + 0)*50));
     }
 }
