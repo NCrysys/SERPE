@@ -4,6 +4,7 @@
  */
 package Xogo.Cadrados.Comestibles;
 
+import Xogo.Xogo;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
@@ -13,8 +14,8 @@ import javax.swing.BorderFactory;
  */
 public class Maza extends Comestible{
     
-    public Maza() {
-        super();
+    public Maza(Xogo xogo) {
+        super(xogo);
     }
     
     @Override

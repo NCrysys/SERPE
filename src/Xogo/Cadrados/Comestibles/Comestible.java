@@ -5,14 +5,17 @@
 package Xogo.Cadrados.Comestibles;
 
 import Xogo.Cadrados.Cadrado;
+import Xogo.Xogo;
 
 /**
  *
  * @author a22noellr
  */
 public abstract class Comestible extends Cadrado{
+    Xogo xogo;
     
-    public Comestible() {
+    public Comestible(Xogo xogo) {
+        this.xogo=xogo;
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
         establecerPosicion();
@@ -22,7 +25,7 @@ public abstract class Comestible extends Cadrado{
     
     @Override
     protected void establecerPosicion() {
-        setCoordX((int) (Math.floor(Math.random() * (18 - 0 + 1) + 0)*50));
-        setCoordY((int) (Math.floor(Math.random() * (18 - 0 + 1) + 0)*50));
+        setCoordX((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0)*TAMANO));
+        setCoordY((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0)*TAMANO));
     }
 }

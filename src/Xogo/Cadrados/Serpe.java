@@ -6,6 +6,7 @@ package Xogo.Cadrados;
 
 import Xogo.Xogo;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -14,12 +15,10 @@ import java.util.ArrayList;
 public class Serpe {
     //ATRIBUTOS
     private Xogo xogo;
-    private int lonxitudeSerpe;
+    private int lonxitudeSerpe=0;
     private ArrayList<CadradoCorpo> corpo = new ArrayList<>();
-    boolean arriba=false;
-    boolean dereita=true;
-    boolean abaixo=false;
-    boolean esquerda=false;
+    private Iterator<CadradoCorpo> iterCorpo;
+    private int voltear=2;
     
     //CONSTRUCTOR
     public Serpe(Xogo xogo) {
@@ -40,46 +39,41 @@ public class Serpe {
     public void setCorpo(ArrayList<CadradoCorpo> corpo) {
         this.corpo = corpo;
     }
+    public Iterator<CadradoCorpo> getIterCorpo() {
+        return iterCorpo;
+    }
+    public void setIterCorpo(Iterator<CadradoCorpo> iterCorpo) {
+        this.iterCorpo = iterCorpo;
+    }
     
     //MÉTODOS
     private void formarSerpe(){
         int posInicioX = 300;
         int posInicioY = 300;
         for (int i = 0; i < 3; i++) {
-            CadradoCorpo cCorpo = new CadradoCorpo();
+            CadradoCorpo cCorpo = new CadradoCorpo(this);
             corpo.add(cCorpo);
             cCorpo.setCoordX(posInicioX-i*cCorpo.getTAMANO());
             cCorpo.setCoordY(posInicioY);
             xogo.getInterfaz().pintarCadrado(cCorpo);
+            lonxitudeSerpe++;
         }
     }
     
     public void voltearArriba(){
-        arriba=true;
-        dereita=false;
-        abaixo=false;
-        esquerda=false;
+        voltear=1;
     }
     
     public void voltearDereita(){
-        arriba=false;
-        dereita=true;
-        abaixo=false;
-        esquerda=false;
+        voltear=2;
     }
     
     public void voltearAbaixo(){
-        arriba=false;
-        dereita=false;
-        abaixo=true;
-        esquerda=false;
+        voltear=3;
     }
     
     public void voltearEsquerda(){
-        arriba=false;
-        dereita=false;
-        abaixo=false;
-        esquerda=true;
+        voltear=4;
     }
     
     /**
@@ -88,13 +82,13 @@ public class Serpe {
     public void avanzar(){
         for (int i = corpo.size()-1; i >= 0; i--) {
             if (i==0){
-                if (arriba){
+                if (voltear==1){
                     corpo.get(i).setCoordY(corpo.get(i).getCoordY()-corpo.get(i).getTAMANO());
                 }
-                else if (dereita){
+                else if (voltear==2){
                     corpo.get(i).setCoordX(corpo.get(i).getCoordX()+corpo.get(i).getTAMANO());
                 }
-                else if (abaixo){
+                else if (voltear==3){
                     corpo.get(i).setCoordY(corpo.get(i).getCoordY()+corpo.get(i).getTAMANO());
                 }
                 else {
@@ -105,5 +99,12 @@ public class Serpe {
                 corpo.get(i).setCoordY(corpo.get(i-1).getCoordY());
             }
         }
+    }
+    
+    public void aumentarLonxitude(){
+        CadradoCorpo cCorpo = new CadradoCorpo(this);
+        cCorpo.establecerPosicion();
+        corpo.add(cCorpo);
+        lonxitudeSerpe++;
     }
 }

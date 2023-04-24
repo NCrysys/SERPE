@@ -12,8 +12,11 @@ import javax.swing.BorderFactory;
  * @author a22noellr
  */
 public class CadradoCorpo extends Cadrado{
+    //ATRIBUTOS
+    private Serpe serpe;
     //CONSTRUCTOR
-    public CadradoCorpo() {
+    public CadradoCorpo(Serpe serpe) {
+        this.serpe=serpe;
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
         cor();
@@ -22,7 +25,10 @@ public class CadradoCorpo extends Cadrado{
     //MÉTODOS
     @Override
     protected void establecerPosicion() {
-        
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
+        setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
+        ////////////////////////////////////////////////////////////////////////////////////////////
     }
     
     @Override

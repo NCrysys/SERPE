@@ -4,12 +4,18 @@
  */
 package Xogo.Cadrados.Comestibles;
 
+import Xogo.Xogo;
+
 /**
  *
  * @author a22noellr
  */
 public class Bomba extends Comestible{
-
+    
+    public Bomba(Xogo xogo) {
+        super(xogo);
+    }
+    
     @Override
     public void cor() {
         

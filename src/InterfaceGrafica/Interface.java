@@ -240,6 +240,11 @@ public class Interface extends javax.swing.JFrame {
         panelXogo.setComponentZOrder(imagen, panelXogo.getComponentCount()-1);
     }
     
+    public void borrarCadrado(Cadrado cadrado){
+        panelXogo.remove(cadrado.getLblCadrado());
+        panelXogo.updateUI();
+    }
+    
     private void crearTimerXogo (int delay){
         timer=new Timer(delay, new ActionListener() {
             @Override
