@@ -60,20 +60,24 @@ public class Serpe {
         }
     }
     
-    public void voltearArriba(){
+    public int voltearArriba(){
         voltear=1;
+        return voltear;
     }
     
-    public void voltearDereita(){
+    public int voltearDereita(){
         voltear=2;
+        return voltear;
     }
     
-    public void voltearAbaixo(){
+    public int voltearAbaixo(){
         voltear=3;
+        return voltear;
     }
     
-    public void voltearEsquerda(){
+    public int voltearEsquerda(){
         voltear=4;
+        return voltear;
     }
     
     /**
@@ -103,6 +107,7 @@ public class Serpe {
     
     public void aumentarLonxitude(){
         CadradoCorpo cCorpo = new CadradoCorpo(this);
+        cCorpo.establecerPosicion();
         corpo.add(cCorpo);
         lonxitudeSerpe++;
     }

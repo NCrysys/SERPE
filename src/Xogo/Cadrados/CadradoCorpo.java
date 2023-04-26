@@ -19,7 +19,6 @@ public class CadradoCorpo extends Cadrado{
         this.serpe=serpe;
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
-        establecerPosicion();
         cor();
     }
     

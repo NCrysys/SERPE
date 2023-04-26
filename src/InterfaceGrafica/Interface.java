@@ -43,11 +43,12 @@ public class Interface extends javax.swing.JFrame {
         bIniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 900));
-        setMinimumSize(new java.awt.Dimension(900, 900));
+        setMaximumSize(new java.awt.Dimension(1150, 900));
+        setMinimumSize(new java.awt.Dimension(1150, 900));
         setResizable(false);
 
         panelXogo.setVisible(false);
+        panelXogo.setLocation(250, 0);
         panelXogo.setBackground(new java.awt.Color(182, 255, 182));
         panelXogo.setMaximumSize(new java.awt.Dimension(900, 900));
         panelXogo.setMinimumSize(new java.awt.Dimension(900, 900));
@@ -78,12 +79,14 @@ public class Interface extends javax.swing.JFrame {
 
         pantallaInicial.setBackground(new java.awt.Color(182, 255, 182));
         pantallaInicial.setBorder(javax.swing.BorderFactory.createMatteBorder(7, 7, 7, 7, new java.awt.Color(80, 40, 0)));
-        pantallaInicial.setMaximumSize(new java.awt.Dimension(900, 900));
-        pantallaInicial.setMinimumSize(new java.awt.Dimension(900, 900));
+        pantallaInicial.setMaximumSize(new java.awt.Dimension(1150, 900));
+        pantallaInicial.setMinimumSize(new java.awt.Dimension(1150, 900));
+        pantallaInicial.setPreferredSize(new java.awt.Dimension(1150, 900));
 
         titulo.setBackground(new java.awt.Color(153, 0, 153));
         titulo.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
         titulo.setForeground(new java.awt.Color(153, 0, 153));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("SERPE");
 
         bIniciar.setBackground(new java.awt.Color(102, 204, 255));
@@ -101,22 +104,20 @@ public class Interface extends javax.swing.JFrame {
         pantallaInicialLayout.setHorizontalGroup(
             pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pantallaInicialLayout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(352, 352, 352))
-            .addGroup(pantallaInicialLayout.createSequentialGroup()
-                .addGap(378, 378, 378)
-                .addComponent(bIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(387, 387, 387))
+                .addGap(438, 438, 438)
+                .addGroup(pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(494, 494, 494))
         );
         pantallaInicialLayout.setVerticalGroup(
             pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pantallaInicialLayout.createSequentialGroup()
-                .addGap(134, 134, 134)
+                .addGap(163, 163, 163)
                 .addComponent(titulo)
-                .addGap(142, 142, 142)
+                .addGap(94, 94, 94)
                 .addComponent(bIniciar)
-                .addContainerGap(484, Short.MAX_VALUE))
+                .addContainerGap(503, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

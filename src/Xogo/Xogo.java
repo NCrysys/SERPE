@@ -26,13 +26,12 @@ public class Xogo {
     private Serpe serpe;
     private Bomba bomba;
     private Comestible froita;
-    private int TAMANO_CADRADOS;
+    private int voltear=2;
     
     //CONTRUCTOR
     public Xogo(Interface interfaz) {
         this.interfaz = interfaz;
         serpe = new Serpe(this);
-        this.TAMANO_CADRADOS = serpe.getCorpo().get(0).getTAMANO();
         xerarFroita();
     }
     
@@ -80,42 +79,70 @@ public class Xogo {
     //MÉTODOS
     public void voltearSerpeArriba(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()-TAMANO_CADRADOS)){
-            serpe.voltearArriba();
+        if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()-cabeza.getTAMANO())){
+            voltear=serpe.voltearArriba();
         }
     }
     
     public void voltearSerpeDereita(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX()+TAMANO_CADRADOS, cabeza.getCoordY())){
-            serpe.voltearDereita();
+        if (comprobarPosicionSerpe(cabeza.getCoordX()+cabeza.getTAMANO(), cabeza.getCoordY())){
+            voltear=serpe.voltearDereita();
         }
     }
     
     public void voltearSerpeAbaixo(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()+TAMANO_CADRADOS)){
-            serpe.voltearAbaixo();
+        if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()+cabeza.getTAMANO())){
+            voltear=serpe.voltearAbaixo();
         }
     }
     
     public void voltearSerpeEsquerda(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX()-TAMANO_CADRADOS, cabeza.getCoordY())){
-            serpe.voltearEsquerda();
+        if (comprobarPosicionSerpe(cabeza.getCoordX()-cabeza.getTAMANO(), cabeza.getCoordY())){
+            voltear=serpe.voltearEsquerda();
         }
     }
     
     public void avanzarSerpe(){
-        serpe.avanzar();
-        comer();
-        pintarSerpe();
+        Cadrado cabeza = serpe.getCorpo().get(0);
+        int xCabeza = cabeza.getCoordX();
+        int yCabeza = cabeza.getCoordY();
+        if (voltear == 1) {
+            yCabeza = cabeza.getCoordY()-cabeza.getTAMANO();
+        }
+        else if (voltear == 2) {
+            xCabeza = cabeza.getCoordX()+cabeza.getTAMANO();
+        }
+        else if (voltear == 3) {
+            yCabeza = cabeza.getCoordY()+cabeza.getTAMANO();
+        }
+        else {
+            xCabeza = cabeza.getCoordX()-cabeza.getTAMANO();
+        }
+        if(comprobarPosicionValida(xCabeza, yCabeza)){
+            serpe.avanzar();
+            comer();
+            pintarSerpe();
+        }
+        else {
+            
+        }
     }
     
     private void pintarSerpe(){
         for (int i = 0; i < serpe.getCorpo().size(); i++) {
             interfaz.pintarCadrado(serpe.getCorpo().get(i));
         }
+    }
+    
+    public boolean comprobarPosicionValida(int x, int y){
+        boolean posicionValida=true;
+        if (!comprobarPosicionSerpe(x, y) || !comprobarBordes(x, y)){
+            posicionValida=false; 
+        }
+        return posicionValida;
     }
     
     private boolean comprobarPosicionSerpe(int x, int y){
@@ -126,6 +153,14 @@ public class Xogo {
             if(x==cadradoCorpo.getCoordX() && y==cadradoCorpo.getCoordY()){
                 posicionValida=false;
             }
+        }
+        return posicionValida;
+    }
+    
+    private boolean comprobarBordes(int x, int y){
+        boolean posicionValida=true;
+        if (x<0 || x>=MAXX || y<0 || y>=MAXY){
+            posicionValida=false;
         }
         return posicionValida;
     }
