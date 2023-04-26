@@ -60,22 +60,19 @@ public class Interface extends javax.swing.JFrame {
 
         imagen.setLocation(0, 0);
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/TableroSerpe.jpg"))); // NOI18N
-        imagen.setMaximumSize(new java.awt.Dimension(900, 900));
-        imagen.setMinimumSize(new java.awt.Dimension(900, 900));
-        imagen.setPreferredSize(new java.awt.Dimension(900, 900));
 
         javax.swing.GroupLayout panelXogoLayout = new javax.swing.GroupLayout(panelXogo);
         panelXogo.setLayout(panelXogoLayout);
         panelXogoLayout.setHorizontalGroup(
             panelXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelXogoLayout.createSequentialGroup()
-                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imagen)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         panelXogoLayout.setVerticalGroup(
             panelXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelXogoLayout.createSequentialGroup()
-                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imagen)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 

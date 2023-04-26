@@ -103,7 +103,6 @@ public class Serpe {
     
     public void aumentarLonxitude(){
         CadradoCorpo cCorpo = new CadradoCorpo(this);
-        cCorpo.establecerPosicion();
         corpo.add(cCorpo);
         lonxitudeSerpe++;
     }

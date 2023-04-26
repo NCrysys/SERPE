@@ -19,18 +19,37 @@ public class CadradoCorpo extends Cadrado{
         this.serpe=serpe;
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
+        establecerPosicion();
         cor();
     }
     
     //MÉTODOS
+    /**
+     * Establece a posición deste cadrado no cu da Serpe
+     */
     @Override
     protected void establecerPosicion() {
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
-        setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
-        ////////////////////////////////////////////////////////////////////////////////////////////
+        if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordX()-TAMANO){
+            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()-TAMANO);
+            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
+        }
+        else if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordX()+TAMANO){
+            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()+TAMANO);
+            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
+        }
+        else if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordY()+TAMANO){
+            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
+            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY()+TAMANO);
+        }
+        else {
+            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
+            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY()-TAMANO);
+        }
     }
     
+    /**
+     * Establece a cor deste cadrado do corpo da Serpe
+     */
     @Override
     public void cor() {
         lblCadrado.setBackground(Color.BLUE);
