@@ -21,12 +21,14 @@ public class Xogo {
     private final int MAXX = 900;
     private final int MAXY = 900;
     private int puntuacion;
-    private int tempo;
+    private int tempo=0;
     private Interface interfaz;
     private Serpe serpe;
     private Bomba bomba;
     private Comestible froita;
     private int voltear=2;
+    private int froitasComidas=0;
+    private int bombasComidas=0;
     
     //CONTRUCTOR
     public Xogo(Interface interfaz) {
@@ -150,7 +152,12 @@ public class Xogo {
         serpe.setIterCorpo(serpe.getCorpo().iterator());
         while (serpe.getIterCorpo().hasNext()) {
             Cadrado cadradoCorpo = serpe.getIterCorpo().next();
-            if(x==cadradoCorpo.getCoordX() && y==cadradoCorpo.getCoordY()){
+            if(cadradoCorpo==serpe.getCorpo().get(serpe.getCorpo().size()-1)){
+                /*if(froita.getCoordX()==cadradoCorpo.getCoordX() && froita.getCoordY()==cadradoCorpo.getCoordY()){
+                    posicionValida=false;
+                }*/
+            }
+            else if(x==cadradoCorpo.getCoordX() && y==cadradoCorpo.getCoordY()){
                 posicionValida=false;
             }
         }
@@ -182,6 +189,8 @@ public class Xogo {
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordX()==froita.getCoordX() && cabeza.getCoordY()==froita.getCoordY()){
             interfaz.borrarCadrado(froita);
+            froitasComidas++;
+            interfaz.engadirFroitas(froitasComidas);
             xerarFroita();
             serpe.aumentarLonxitude();
         }
