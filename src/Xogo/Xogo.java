@@ -26,6 +26,7 @@ public class Xogo {
     private Serpe serpe;
     private Bomba bomba;
     private Comestible froita;
+    private HashMap<Integer,Comestible> froitas;
     private int voltear=2;
     private int froitasComidas=0;
     private int bombasComidas=0;
@@ -34,6 +35,7 @@ public class Xogo {
     public Xogo(Interface interfaz) {
         this.interfaz = interfaz;
         serpe = new Serpe(this);
+        xerarConxuntoFroitas();
         xerarFroita();
     }
     
@@ -153,7 +155,10 @@ public class Xogo {
         while (serpe.getIterCorpo().hasNext()) {
             Cadrado cadradoCorpo = serpe.getIterCorpo().next();
             if(cadradoCorpo==serpe.getCorpo().get(serpe.getCorpo().size()-1)){
-                /*if(froita.getCoordX()==cadradoCorpo.getCoordX() && froita.getCoordY()==cadradoCorpo.getCoordY()){
+                if(froita.getCoordX()==cadradoCorpo.getCoordX() && froita.getCoordY()==cadradoCorpo.getCoordY()){
+                    posicionValida=false;
+                }/*
+                if(bomba.getCoordX()==cadradoCorpo.getCoordX() && bomba.getCoordY()==cadradoCorpo.getCoordY()){
                     posicionValida=false;
                 }*/
             }
@@ -172,27 +177,31 @@ public class Xogo {
         return posicionValida;
     }
     
+    public void xerarConxuntoFroitas(){
+        froitas=new HashMap();
+        froitas.put(1, new Maza(this));
+        froitas.put(2, new Maza(this));
+        froitas.put(3, new Maza(this));
+    }
+    
     /**
      * Establecese aleatoriamente un Comestible para o campo froita.
      */
     public void xerarFroita(){
-        HashMap<Integer,Comestible> map=new HashMap();
-        map.put(1, new Maza(this));
-        map.put(2, new Maza(this));
-        map.put(3, new Maza(this));
         int comida = (int) Math.floor(Math.random() * (3 - 1 + 1) + 1);
-        froita = map.get(comida);
+        froita = froitas.get(comida);
+        froita.establecerPosicion();
         interfaz.pintarCadrado(froita);
     }
     
     public boolean comer(){
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordX()==froita.getCoordX() && cabeza.getCoordY()==froita.getCoordY()){
+            serpe.aumentarLonxitude();
             interfaz.borrarCadrado(froita);
             froitasComidas++;
             interfaz.engadirFroitas(froitasComidas);
             xerarFroita();
-            serpe.aumentarLonxitude();
         }
         /*else if (cabeza.getCoordX()==bomba.getCoordX() && cabeza.getCoordY()==bomba.getCoordY()){
             

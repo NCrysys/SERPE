@@ -5,6 +5,7 @@
 package Xogo.Cadrados;
 
 import Xogo.Xogo;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -18,6 +19,7 @@ public class Serpe {
     private int lonxitudeSerpe=0;
     private ArrayList<CadradoCorpo> corpo = new ArrayList<>();
     private Iterator<CadradoCorpo> iterCorpo;
+    private CadradoCorpo cabeza;
     private int voltear=2;
     
     //CONSTRUCTOR
@@ -48,6 +50,8 @@ public class Serpe {
     
     //MÉTODOS
     private void formarSerpe(){
+        cabeza = new CadradoCorpo(this);
+        xogo.getInterfaz().pintarCadrado(cabeza);
         int posInicioX = 300;
         int posInicioY = 300;
         for (int i = 0; i < 3; i++) {
@@ -58,6 +62,14 @@ public class Serpe {
             xogo.getInterfaz().pintarCadrado(cCorpo);
             lonxitudeSerpe++;
         }
+        establecerCabeza();
+    }
+    
+    private void establecerCabeza(){
+        cabeza.lblCadrado.setBackground(Color.CYAN);
+        cabeza.lblCadrado.setSize(cabeza.TAMANO + 4, cabeza.TAMANO + 4);
+        cabeza.setCoordX(corpo.get(0).getCoordX() - 2);
+        cabeza.setCoordY(corpo.get(0).getCoordY() - 2);
     }
     
     public int voltearArriba(){
@@ -103,6 +115,8 @@ public class Serpe {
                 corpo.get(i).setCoordY(corpo.get(i-1).getCoordY());
             }
         }
+        cabeza.setCoordX(corpo.get(0).getCoordX()-2);
+        cabeza.setCoordY(corpo.get(0).getCoordY()-2);
     }
     
     public void aumentarLonxitude(){

@@ -119,6 +119,7 @@ public class Interface extends javax.swing.JFrame {
         menu.setMaximumSize(new java.awt.Dimension(250, 900));
         menu.setMinimumSize(new java.awt.Dimension(250, 900));
         menu.setName(""); // NOI18N
+        menu.setPreferredSize(new java.awt.Dimension(250, 900));
 
         titulo2.setBackground(new java.awt.Color(153, 0, 153));
         titulo2.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
@@ -166,7 +167,6 @@ public class Interface extends javax.swing.JFrame {
         bPausa.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
         bPausa.setForeground(new java.awt.Color(102, 0, 102));
         bPausa.setText("PAUSE");
-        bPausa.setActionCommand("PAUSE");
         bPausa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bPausaActionPerformed(evt);
@@ -221,7 +221,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(lblTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(tempoXogado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         panelXogo.setLocation(250, 0);
@@ -242,7 +242,7 @@ public class Interface extends javax.swing.JFrame {
         panelXogo.setLayout(panelXogoLayout);
         panelXogoLayout.setHorizontalGroup(
             panelXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagen)
+            .addComponent(imagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelXogoLayout.setVerticalGroup(
             panelXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -18,13 +18,12 @@ public abstract class Comestible extends Cadrado{
         this.xogo=xogo;
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
-        establecerPosicion();
         cor();
     }
     
     
     @Override
-    protected void establecerPosicion() {
+    public void establecerPosicion() {
         do{
             setCoordX((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0) * TAMANO));
             setCoordY((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0) * TAMANO)); 
