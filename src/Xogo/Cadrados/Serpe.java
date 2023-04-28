@@ -57,6 +57,7 @@ public class Serpe {
         for (int i = 0; i < 3; i++) {
             CadradoCorpo cCorpo = new CadradoCorpo(this);
             corpo.add(cCorpo);
+            cCorpo.cor();
             cCorpo.setCoordX(posInicioX-i*cCorpo.getTAMANO());
             cCorpo.setCoordY(posInicioY);
             xogo.getInterfaz().pintarCadrado(cCorpo);
@@ -67,9 +68,10 @@ public class Serpe {
     
     private void establecerCabeza(){
         cabeza.lblCadrado.setBackground(Color.CYAN);
-        cabeza.lblCadrado.setSize(cabeza.TAMANO + 4, cabeza.TAMANO + 4);
-        cabeza.setCoordX(corpo.get(0).getCoordX() - 2);
-        cabeza.setCoordY(corpo.get(0).getCoordY() - 2);
+        cabeza.lblCadrado.setSize(cabeza.TAMANO + 10, cabeza.TAMANO + 10);
+        cabeza.setCoordX(corpo.get(0).getCoordX() - 5);
+        cabeza.setCoordY(corpo.get(0).getCoordY() - 5);
+        cabeza.lblCadrado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/CabezaSerpe.png")));
     }
     
     public int voltearArriba(){
@@ -115,12 +117,13 @@ public class Serpe {
                 corpo.get(i).setCoordY(corpo.get(i-1).getCoordY());
             }
         }
-        cabeza.setCoordX(corpo.get(0).getCoordX()-2);
-        cabeza.setCoordY(corpo.get(0).getCoordY()-2);
+        cabeza.setCoordX(corpo.get(0).getCoordX()-5);
+        cabeza.setCoordY(corpo.get(0).getCoordY()-5);
     }
     
     public void aumentarLonxitude(){
         CadradoCorpo cCorpo = new CadradoCorpo(this);
+        cCorpo.cor();
         cCorpo.establecerPosicion();
         corpo.add(cCorpo);
         lonxitudeSerpe++;
