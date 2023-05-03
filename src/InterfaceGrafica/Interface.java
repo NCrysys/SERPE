@@ -37,9 +37,14 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDModoXogo = new javax.swing.JDialog();
+        panelModoXogo = new javax.swing.JPanel();
+        bClasico = new javax.swing.JButton();
+        bEsfera = new javax.swing.JButton();
         pantallaInicial = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         bIniciar = new javax.swing.JButton();
+        bModoXogo = new javax.swing.JButton();
         juego = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         titulo2 = new javax.swing.JLabel();
@@ -52,6 +57,74 @@ public class Interface extends javax.swing.JFrame {
         bPausa = new javax.swing.JToggleButton();
         panelXogo = new javax.swing.JPanel();
         imagen = new javax.swing.JLabel();
+
+        jDModoXogo.setVisible(false);
+        jDModoXogo.setTitle("Modo de Xogo");
+        jDModoXogo.setBackground(new java.awt.Color(182, 255, 182));
+        jDModoXogo.setForeground(new java.awt.Color(182, 255, 182));
+        jDModoXogo.setLocation(new java.awt.Point(350, 300));
+        jDModoXogo.setMaximumSize(new java.awt.Dimension(400, 400));
+        jDModoXogo.setMinimumSize(new java.awt.Dimension(400, 400));
+        jDModoXogo.setPreferredSize(new java.awt.Dimension(400, 400));
+        jDModoXogo.setResizable(false);
+        jDModoXogo.setSize(new java.awt.Dimension(400, 400));
+
+        panelModoXogo.setBackground(new java.awt.Color(182, 255, 182));
+        panelModoXogo.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(80, 40, 0)));
+        panelModoXogo.setMaximumSize(new java.awt.Dimension(400, 400));
+        panelModoXogo.setMinimumSize(new java.awt.Dimension(400, 400));
+
+        bClasico.setBackground(new java.awt.Color(102, 204, 255));
+        bClasico.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bClasico.setForeground(new java.awt.Color(102, 0, 102));
+        bClasico.setText("CLÁSICO");
+        bClasico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bClasicoActionPerformed(evt);
+            }
+        });
+
+        bEsfera.setBackground(new java.awt.Color(102, 204, 255));
+        bEsfera.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bEsfera.setForeground(new java.awt.Color(102, 0, 102));
+        bEsfera.setText("ESFERA");
+        bEsfera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEsferaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelModoXogoLayout = new javax.swing.GroupLayout(panelModoXogo);
+        panelModoXogo.setLayout(panelModoXogoLayout);
+        panelModoXogoLayout.setHorizontalGroup(
+            panelModoXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModoXogoLayout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addGroup(panelModoXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(bClasico, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(bEsfera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(91, 91, 91))
+        );
+        panelModoXogoLayout.setVerticalGroup(
+            panelModoXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModoXogoLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(bClasico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
+                .addComponent(bEsfera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(134, 134, 134))
+        );
+
+        javax.swing.GroupLayout jDModoXogoLayout = new javax.swing.GroupLayout(jDModoXogo.getContentPane());
+        jDModoXogo.getContentPane().setLayout(jDModoXogoLayout);
+        jDModoXogoLayout.setHorizontalGroup(
+            jDModoXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelModoXogo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jDModoXogoLayout.setVerticalGroup(
+            jDModoXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelModoXogo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Serpe");
@@ -85,6 +158,16 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        bModoXogo.setBackground(new java.awt.Color(102, 204, 255));
+        bModoXogo.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bModoXogo.setForeground(new java.awt.Color(102, 0, 102));
+        bModoXogo.setText("MODO DE XOGO");
+        bModoXogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bModoXogoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pantallaInicialLayout = new javax.swing.GroupLayout(pantallaInicial);
         pantallaInicial.setLayout(pantallaInicialLayout);
         pantallaInicialLayout.setHorizontalGroup(
@@ -93,7 +176,8 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(438, 438, 438)
                 .addGroup(pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bModoXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(494, 494, 494))
         );
         pantallaInicialLayout.setVerticalGroup(
@@ -103,7 +187,9 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(titulo)
                 .addGap(94, 94, 94)
                 .addComponent(bIniciar)
-                .addContainerGap(503, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(bModoXogo)
+                .addContainerGap(418, Short.MAX_VALUE))
         );
 
         getContentPane().add(pantallaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -328,6 +414,18 @@ public class Interface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bPausaActionPerformed
 
+    private void bModoXogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModoXogoActionPerformed
+        jDModoXogo.setVisible(true);
+    }//GEN-LAST:event_bModoXogoActionPerformed
+
+    private void bClasicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClasicoActionPerformed
+        jDModoXogo.setVisible(false);
+    }//GEN-LAST:event_bClasicoActionPerformed
+
+    private void bEsferaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEsferaActionPerformed
+        jDModoXogo.setVisible(false);
+    }//GEN-LAST:event_bEsferaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,16 +520,21 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bClasico;
+    private javax.swing.JButton bEsfera;
     private javax.swing.JButton bIniciar;
+    private javax.swing.JButton bModoXogo;
     private javax.swing.JToggleButton bPausa;
     private javax.swing.JLabel bombasComidas;
     private javax.swing.JLabel froitasComidas;
     private javax.swing.JLabel imagen;
+    private javax.swing.JDialog jDModoXogo;
     private javax.swing.JPanel juego;
     private javax.swing.JLabel lblBombas;
     private javax.swing.JLabel lblFroitas;
     private javax.swing.JLabel lblTempo;
     private javax.swing.JPanel menu;
+    private javax.swing.JPanel panelModoXogo;
     private javax.swing.JPanel panelXogo;
     private javax.swing.JPanel pantallaInicial;
     private javax.swing.JLabel tempoXogado;
