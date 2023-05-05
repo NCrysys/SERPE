@@ -71,9 +71,7 @@ public class Interface extends javax.swing.JFrame {
         jDModoXogo.setBackground(new java.awt.Color(182, 255, 182));
         jDModoXogo.setForeground(new java.awt.Color(182, 255, 182));
         jDModoXogo.setLocation(new java.awt.Point(350, 300));
-        jDModoXogo.setMaximumSize(new java.awt.Dimension(400, 400));
         jDModoXogo.setMinimumSize(new java.awt.Dimension(400, 400));
-        jDModoXogo.setPreferredSize(new java.awt.Dimension(400, 400));
         jDModoXogo.setResizable(false);
         jDModoXogo.setSize(new java.awt.Dimension(400, 400));
 
@@ -313,19 +311,19 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(titulo2)
                 .addGap(70, 70, 70)
                 .addComponent(bPausa)
-                .addGap(50, 50, 50)
+                .addGap(40, 40, 40)
                 .addComponent(lblFroitas, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(froitasComidas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(40, 40, 40)
                 .addComponent(lblBombas, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(bombasComidas, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(40, 40, 40)
                 .addComponent(lblTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(tempoXogado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         panelXogo.setLocation(250, 0);

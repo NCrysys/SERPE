@@ -4,7 +4,8 @@
  */
 package Xogo.Cadrados;
 
-import java.awt.Color;
+import static java.awt.Color.BLACK;
+import static java.awt.Color.BLUE;
 import javax.swing.BorderFactory;
 
 /**
@@ -50,8 +51,8 @@ public class CadradoCorpo extends Cadrado{
      */
     @Override
     public void cor() {
-        lblCadrado.setBackground(Color.BLUE);
-        lblCadrado.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        lblCadrado.setBackground(BLUE);
+        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
         lblCadrado.setOpaque(true);
     }
     

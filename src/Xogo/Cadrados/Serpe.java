@@ -20,12 +20,11 @@ public class Serpe {
     private ArrayList<CadradoCorpo> corpo = new ArrayList<>();
     private Iterator<CadradoCorpo> iterCorpo;
     private CadradoCorpo cabeza;
-    private int voltear=2;
+    private int voltear=2;;
     
     //CONSTRUCTOR
     public Serpe(Xogo xogo) {
         this.xogo=xogo;
-        formarSerpe();
     }
     
     //GETTER E SETTER
@@ -47,9 +46,22 @@ public class Serpe {
     public void setIterCorpo(Iterator<CadradoCorpo> iterCorpo) {
         this.iterCorpo = iterCorpo;
     }
+    public CadradoCorpo getCabeza() {
+        return cabeza;
+    }
+    public void setCabeza(CadradoCorpo cabeza) {
+        this.cabeza = cabeza;
+    }
+    public int getVoltear() {
+        return voltear;
+    }
+    public void setVoltear(int voltear) {
+        this.voltear = voltear;
+    }
+    
     
     //MÉTODOS
-    private void formarSerpe(){
+    public void formarSerpe(){
         cabeza = new CadradoCorpo(this);
         xogo.getInterfaz().pintarCadrado(cabeza);
         int posInicioX = 300;
@@ -67,7 +79,6 @@ public class Serpe {
     }
     
     private void establecerCabeza(){
-        cabeza.lblCadrado.setBackground(Color.CYAN);
         cabeza.lblCadrado.setSize(cabeza.TAMANO + 10, cabeza.TAMANO + 10);
         cabeza.setCoordX(corpo.get(0).getCoordX() - 5);
         cabeza.setCoordY(corpo.get(0).getCoordY() - 5);
@@ -117,6 +128,10 @@ public class Serpe {
                 corpo.get(i).setCoordY(corpo.get(i-1).getCoordY());
             }
         }
+        avanzarCabeza();
+    }
+    
+    public void avanzarCabeza(){
         cabeza.setCoordX(corpo.get(0).getCoordX()-5);
         cabeza.setCoordY(corpo.get(0).getCoordY()-5);
     }
@@ -127,5 +142,16 @@ public class Serpe {
         cCorpo.establecerPosicion();
         corpo.add(cCorpo);
         lonxitudeSerpe++;
+    }
+    
+    public void reducirLonxitude(){
+        corpo.remove(corpo.size()-1);
+        lonxitudeSerpe--;
+    }
+    
+    public void borrarSerpe(){
+        corpo.removeAll(corpo);
+        lonxitudeSerpe=0;
+        voltear=2;
     }
 }
