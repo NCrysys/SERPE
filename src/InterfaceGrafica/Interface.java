@@ -1,11 +1,19 @@
 package InterfaceGrafica;
 
+import ConexionBD.ConexionBaseDatos;
+import ConexionBD.Partida;
 import Xogo.Cadrados.Cadrado;
 import Xogo.Xogo;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,6 +26,7 @@ import javax.swing.Timer;
  */
 public class Interface extends javax.swing.JFrame {
     private Xogo xogo;
+    private ConexionBaseDatos conexionBD;
     private Timer timer;
     private Timer tempoXogo;
     private int delay = 500;
@@ -27,6 +36,7 @@ public class Interface extends javax.swing.JFrame {
     public Interface() {
         initComponents();
         xogo = new Xogo(this);
+        conexionBD = new ConexionBaseDatos(this);
         crearTimerVelocidade();
         crearTempoXogo();
     }
@@ -44,13 +54,38 @@ public class Interface extends javax.swing.JFrame {
         panelModoXogo = new javax.swing.JPanel();
         bClasico = new javax.swing.JButton();
         bEsfera = new javax.swing.JButton();
+        jDGardarPuntuacion = new javax.swing.JDialog();
+        panelGardarPuntuacion = new javax.swing.JPanel();
+        bIniciarSesión = new javax.swing.JButton();
+        bRegistrarse = new javax.swing.JButton();
+        bConfirmarGardarPuntuacion = new javax.swing.JButton();
+        lblComoUsuario = new javax.swing.JLabel();
+        jDSesion = new javax.swing.JDialog();
+        panelInicioSesion = new javax.swing.JPanel();
+        usuario = new javax.swing.JTextField();
+        lblUsuario = new javax.swing.JLabel();
+        lblContrasinal = new javax.swing.JLabel();
+        contrasinal = new javax.swing.JTextField();
+        bConfirmarInicioSesion = new javax.swing.JButton();
+        lblUsuarioNonEncontrado = new javax.swing.JLabel();
+        tituloInicioSesion = new javax.swing.JLabel();
+        panelRegistrarse = new javax.swing.JPanel();
+        usuarioNovo = new javax.swing.JTextField();
+        lblUsuarioNovo = new javax.swing.JLabel();
+        lblContrasinalNovo = new javax.swing.JLabel();
+        contrasinalNovo = new javax.swing.JTextField();
+        bConfirmarRegistrarse = new javax.swing.JButton();
+        tituloRegistrarse = new javax.swing.JLabel();
+        lblUsuarioOcupado = new javax.swing.JLabel();
         pantallaInicial = new javax.swing.JPanel();
-        titulo = new javax.swing.JLabel();
+        tituloSerpe = new javax.swing.JLabel();
         bIniciar = new javax.swing.JButton();
         bModoXogo = new javax.swing.JButton();
+        bPuntuacions = new javax.swing.JButton();
+        bSairXogo = new javax.swing.JButton();
         juego = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
-        titulo2 = new javax.swing.JLabel();
+        tituloMenuSerpe = new javax.swing.JLabel();
         lblBombas = new javax.swing.JLabel();
         lblFroitas = new javax.swing.JLabel();
         bombasComidas = new javax.swing.JLabel();
@@ -58,18 +93,26 @@ public class Interface extends javax.swing.JFrame {
         tempoXogado = new javax.swing.JLabel();
         froitasComidas = new javax.swing.JLabel();
         bPausa = new javax.swing.JToggleButton();
+        puntosObtidos = new javax.swing.JLabel();
+        lblPuntuacion = new javax.swing.JLabel();
         panelXogo = new javax.swing.JPanel();
         imagen = new javax.swing.JLabel();
         panelFinXogo = new javax.swing.JPanel();
-        titulo3 = new javax.swing.JLabel();
+        tituloFinXogo = new javax.swing.JLabel();
         bPantallaInicial = new javax.swing.JButton();
         bNovaPartida = new javax.swing.JButton();
         bGardarPuntuacion = new javax.swing.JButton();
+        panelPuntuacions = new javax.swing.JPanel();
+        tituloSerpe1 = new javax.swing.JLabel();
+        bVolverInicio = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePuntuacions = new javax.swing.JTable();
 
         jDModoXogo.setVisible(false);
         jDModoXogo.setTitle("Modo de Xogo");
         jDModoXogo.setBackground(new java.awt.Color(182, 255, 182));
         jDModoXogo.setForeground(new java.awt.Color(182, 255, 182));
+        jDModoXogo.setIconImage(getIconImage());
         jDModoXogo.setLocation(new java.awt.Point(350, 300));
         jDModoXogo.setMinimumSize(new java.awt.Dimension(400, 400));
         jDModoXogo.setResizable(false);
@@ -142,9 +185,316 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
+        jDGardarPuntuacion.setVisible(false);
+        jDGardarPuntuacion.setLocation(350, 100);
+        jDGardarPuntuacion.setTitle("Gardar Puntuación");
+        jDGardarPuntuacion.setIconImage(getIconImage());
+        jDGardarPuntuacion.setMinimumSize(new java.awt.Dimension(700, 700));
+        jDGardarPuntuacion.setResizable(false);
+
+        panelGardarPuntuacion.setBackground(new java.awt.Color(182, 255, 182));
+        panelGardarPuntuacion.setMaximumSize(new java.awt.Dimension(700, 700));
+        panelGardarPuntuacion.setMinimumSize(new java.awt.Dimension(700, 700));
+        panelGardarPuntuacion.setPreferredSize(new java.awt.Dimension(700, 700));
+
+        bIniciarSesión.setBackground(new java.awt.Color(102, 204, 255));
+        bIniciarSesión.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bIniciarSesión.setForeground(new java.awt.Color(102, 0, 102));
+        bIniciarSesión.setText("INICIAR SESIÓN");
+        bIniciarSesión.setMaximumSize(new java.awt.Dimension(200, 50));
+        bIniciarSesión.setMinimumSize(new java.awt.Dimension(200, 50));
+        bIniciarSesión.setPreferredSize(new java.awt.Dimension(200, 50));
+        bIniciarSesión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bIniciarSesiónActionPerformed(evt);
+            }
+        });
+
+        bRegistrarse.setBackground(new java.awt.Color(102, 204, 255));
+        bRegistrarse.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bRegistrarse.setForeground(new java.awt.Color(102, 0, 102));
+        bRegistrarse.setText("REGISTRARSE");
+        bRegistrarse.setMaximumSize(new java.awt.Dimension(200, 50));
+        bRegistrarse.setMinimumSize(new java.awt.Dimension(200, 50));
+        bRegistrarse.setPreferredSize(new java.awt.Dimension(200, 50));
+        bRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRegistrarseActionPerformed(evt);
+            }
+        });
+
+        bConfirmarGardarPuntuacion.setBackground(new java.awt.Color(102, 204, 255));
+        bConfirmarGardarPuntuacion.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bConfirmarGardarPuntuacion.setForeground(new java.awt.Color(102, 0, 102));
+        bConfirmarGardarPuntuacion.setText(" GARDAR PUNTUACIÓN");
+        bConfirmarGardarPuntuacion.setMaximumSize(new java.awt.Dimension(200, 50));
+        bConfirmarGardarPuntuacion.setMinimumSize(new java.awt.Dimension(200, 50));
+        bConfirmarGardarPuntuacion.setPreferredSize(new java.awt.Dimension(200, 50));
+        bConfirmarGardarPuntuacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarGardarPuntuacionActionPerformed(evt);
+            }
+        });
+
+        lblComoUsuario.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblComoUsuario.setForeground(new java.awt.Color(102, 0, 102));
+        lblComoUsuario.setText("Como invitado");
+
+        javax.swing.GroupLayout panelGardarPuntuacionLayout = new javax.swing.GroupLayout(panelGardarPuntuacion);
+        panelGardarPuntuacion.setLayout(panelGardarPuntuacionLayout);
+        panelGardarPuntuacionLayout.setHorizontalGroup(
+            panelGardarPuntuacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGardarPuntuacionLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(bIniciarSesión, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addComponent(bRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
+            .addGroup(panelGardarPuntuacionLayout.createSequentialGroup()
+                .addGroup(panelGardarPuntuacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGardarPuntuacionLayout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(bConfirmarGardarPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGardarPuntuacionLayout.createSequentialGroup()
+                        .addGap(247, 247, 247)
+                        .addComponent(lblComoUsuario)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGardarPuntuacionLayout.setVerticalGroup(
+            panelGardarPuntuacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGardarPuntuacionLayout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(panelGardarPuntuacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bIniciarSesión, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(163, 163, 163)
+                .addComponent(bConfirmarGardarPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblComoUsuario)
+                .addContainerGap(271, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDGardarPuntuacionLayout = new javax.swing.GroupLayout(jDGardarPuntuacion.getContentPane());
+        jDGardarPuntuacion.getContentPane().setLayout(jDGardarPuntuacionLayout);
+        jDGardarPuntuacionLayout.setHorizontalGroup(
+            jDGardarPuntuacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGardarPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jDGardarPuntuacionLayout.setVerticalGroup(
+            jDGardarPuntuacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGardarPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jDSesion.setVisible(false);
+        jDSesion.setLocation(100, 100);
+        jDSesion.setTitle("Sesión");
+        jDSesion.setIconImage(getIconImage());
+        jDSesion.setMinimumSize(new java.awt.Dimension(500, 500));
+        jDSesion.setResizable(false);
+
+        panelInicioSesion.setVisible(false);
+        panelInicioSesion.setBackground(new java.awt.Color(182, 255, 182));
+        panelInicioSesion.setMaximumSize(new java.awt.Dimension(500, 500));
+        panelInicioSesion.setMinimumSize(new java.awt.Dimension(500, 500));
+        panelInicioSesion.setPreferredSize(new java.awt.Dimension(500, 500));
+
+        usuario.setBackground(new java.awt.Color(102, 204, 255));
+
+        lblUsuario.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(102, 0, 102));
+        lblUsuario.setText("Inserte o seu usuario:");
+
+        lblContrasinal.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblContrasinal.setForeground(new java.awt.Color(102, 0, 102));
+        lblContrasinal.setText("Inserte o seu contrasinal:");
+
+        contrasinal.setBackground(new java.awt.Color(102, 204, 255));
+
+        bConfirmarInicioSesion.setBackground(new java.awt.Color(102, 204, 255));
+        bConfirmarInicioSesion.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
+        bConfirmarInicioSesion.setForeground(new java.awt.Color(102, 0, 102));
+        bConfirmarInicioSesion.setText("INICIAR SESION");
+        bConfirmarInicioSesion.setMaximumSize(new java.awt.Dimension(200, 50));
+        bConfirmarInicioSesion.setMinimumSize(new java.awt.Dimension(200, 50));
+        bConfirmarInicioSesion.setPreferredSize(new java.awt.Dimension(200, 50));
+        bConfirmarInicioSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarInicioSesionActionPerformed(evt);
+            }
+        });
+
+        lblUsuarioNonEncontrado.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblUsuarioNonEncontrado.setForeground(new java.awt.Color(102, 0, 102));
+
+        tituloInicioSesion.setBackground(new java.awt.Color(153, 0, 153));
+        tituloInicioSesion.setFont(new java.awt.Font("Trebuchet MS", 3, 24)); // NOI18N
+        tituloInicioSesion.setForeground(new java.awt.Color(153, 0, 153));
+        tituloInicioSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloInicioSesion.setText("Inicio de Sesión");
+
+        javax.swing.GroupLayout panelInicioSesionLayout = new javax.swing.GroupLayout(panelInicioSesion);
+        panelInicioSesion.setLayout(panelInicioSesionLayout);
+        panelInicioSesionLayout.setHorizontalGroup(
+            panelInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioSesionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tituloInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelInicioSesionLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(panelInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblUsuarioNonEncontrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contrasinal)
+                    .addComponent(lblContrasinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usuario)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bConfirmarInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(234, Short.MAX_VALUE))
+        );
+
+        panelInicioSesionLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {contrasinal, lblContrasinal, lblUsuario, usuario});
+
+        panelInicioSesionLayout.setVerticalGroup(
+            panelInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioSesionLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(tituloInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(lblUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(lblContrasinal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contrasinal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(bConfirmarInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblUsuarioNonEncontrado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+
+        panelInicioSesionLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {contrasinal, lblContrasinal, lblUsuario, usuario});
+
+        panelRegistrarse.setVisible(false);
+        panelRegistrarse.setBackground(new java.awt.Color(182, 255, 182));
+        panelRegistrarse.setMaximumSize(new java.awt.Dimension(500, 500));
+        panelRegistrarse.setMinimumSize(new java.awt.Dimension(500, 500));
+
+        usuarioNovo.setBackground(new java.awt.Color(102, 204, 255));
+
+        lblUsuarioNovo.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblUsuarioNovo.setForeground(new java.awt.Color(102, 0, 102));
+        lblUsuarioNovo.setText("Inserte un nome de usuario:");
+
+        lblContrasinalNovo.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblContrasinalNovo.setForeground(new java.awt.Color(102, 0, 102));
+        lblContrasinalNovo.setText("Inserte un contrasinal:");
+
+        contrasinalNovo.setBackground(new java.awt.Color(102, 204, 255));
+
+        bConfirmarRegistrarse.setBackground(new java.awt.Color(102, 204, 255));
+        bConfirmarRegistrarse.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
+        bConfirmarRegistrarse.setForeground(new java.awt.Color(102, 0, 102));
+        bConfirmarRegistrarse.setText("REGISTRARSE");
+        bConfirmarRegistrarse.setMaximumSize(new java.awt.Dimension(200, 50));
+        bConfirmarRegistrarse.setMinimumSize(new java.awt.Dimension(200, 50));
+        bConfirmarRegistrarse.setPreferredSize(new java.awt.Dimension(200, 50));
+        bConfirmarRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarRegistrarseActionPerformed(evt);
+            }
+        });
+
+        tituloRegistrarse.setBackground(new java.awt.Color(153, 0, 153));
+        tituloRegistrarse.setFont(new java.awt.Font("Trebuchet MS", 3, 24)); // NOI18N
+        tituloRegistrarse.setForeground(new java.awt.Color(153, 0, 153));
+        tituloRegistrarse.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloRegistrarse.setText("Registrarse");
+
+        lblUsuarioOcupado.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
+        lblUsuarioOcupado.setForeground(new java.awt.Color(102, 0, 102));
+
+        javax.swing.GroupLayout panelRegistrarseLayout = new javax.swing.GroupLayout(panelRegistrarse);
+        panelRegistrarse.setLayout(panelRegistrarseLayout);
+        panelRegistrarseLayout.setHorizontalGroup(
+            panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(contrasinalNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblContrasinalNovo)
+                            .addComponent(usuarioNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsuarioNovo)
+                            .addComponent(bConfirmarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsuarioOcupado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(tituloRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                .addGap(168, 168, 168))
+        );
+
+        panelRegistrarseLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {contrasinalNovo, lblContrasinalNovo, lblUsuarioNovo, usuarioNovo});
+
+        panelRegistrarseLayout.setVerticalGroup(
+            panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(tituloRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblUsuarioNovo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usuarioNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(lblContrasinalNovo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contrasinalNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(bConfirmarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblUsuarioOcupado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
+        );
+
+        panelRegistrarseLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {contrasinalNovo, lblContrasinalNovo, lblUsuarioNovo, usuarioNovo});
+
+        javax.swing.GroupLayout jDSesionLayout = new javax.swing.GroupLayout(jDSesion.getContentPane());
+        jDSesion.getContentPane().setLayout(jDSesionLayout);
+        jDSesionLayout.setHorizontalGroup(
+            jDSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(jDSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDSesionLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jDSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDSesionLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jDSesionLayout.setVerticalGroup(
+            jDSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(jDSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDSesionLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jDSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDSesionLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Serpe");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(getIconImage());
         setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(1150, 900));
         setMinimumSize(new java.awt.Dimension(1150, 900));
@@ -158,11 +508,11 @@ public class Interface extends javax.swing.JFrame {
         pantallaInicial.setMinimumSize(new java.awt.Dimension(1150, 900));
         pantallaInicial.setPreferredSize(new java.awt.Dimension(1150, 900));
 
-        titulo.setBackground(new java.awt.Color(153, 0, 153));
-        titulo.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
-        titulo.setForeground(new java.awt.Color(153, 0, 153));
-        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("SERPE");
+        tituloSerpe.setBackground(new java.awt.Color(153, 0, 153));
+        tituloSerpe.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
+        tituloSerpe.setForeground(new java.awt.Color(153, 0, 153));
+        tituloSerpe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloSerpe.setText("SERPE");
 
         bIniciar.setBackground(new java.awt.Color(102, 204, 255));
         bIniciar.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
@@ -184,28 +534,54 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        bPuntuacions.setBackground(new java.awt.Color(102, 204, 255));
+        bPuntuacions.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bPuntuacions.setForeground(new java.awt.Color(102, 0, 102));
+        bPuntuacions.setText("VER PUNTUACIÓNS");
+        bPuntuacions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPuntuacionsActionPerformed(evt);
+            }
+        });
+
+        bSairXogo.setBackground(new java.awt.Color(102, 204, 255));
+        bSairXogo.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bSairXogo.setForeground(new java.awt.Color(102, 0, 102));
+        bSairXogo.setText("SAÍR DO XOGO");
+        bSairXogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSairXogoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pantallaInicialLayout = new javax.swing.GroupLayout(pantallaInicial);
         pantallaInicial.setLayout(pantallaInicialLayout);
         pantallaInicialLayout.setHorizontalGroup(
             pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pantallaInicialLayout.createSequentialGroup()
-                .addGap(438, 438, 438)
+                .addGap(421, 421, 421)
                 .addGroup(pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tituloSerpe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bModoXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(494, 494, 494))
+                    .addComponent(bModoXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bPuntuacions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bSairXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(443, 443, 443))
         );
         pantallaInicialLayout.setVerticalGroup(
             pantallaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pantallaInicialLayout.createSequentialGroup()
                 .addGap(163, 163, 163)
-                .addComponent(titulo)
+                .addComponent(tituloSerpe)
                 .addGap(94, 94, 94)
                 .addComponent(bIniciar)
-                .addGap(41, 41, 41)
+                .addGap(50, 50, 50)
                 .addComponent(bModoXogo)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(bPuntuacions)
+                .addGap(50, 50, 50)
+                .addComponent(bSairXogo)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         getContentPane().add(pantallaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -223,11 +599,11 @@ public class Interface extends javax.swing.JFrame {
         menu.setName(""); // NOI18N
         menu.setPreferredSize(new java.awt.Dimension(250, 900));
 
-        titulo2.setBackground(new java.awt.Color(153, 0, 153));
-        titulo2.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
-        titulo2.setForeground(new java.awt.Color(255, 0, 204));
-        titulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo2.setText("SERPE");
+        tituloMenuSerpe.setBackground(new java.awt.Color(153, 0, 153));
+        tituloMenuSerpe.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
+        tituloMenuSerpe.setForeground(new java.awt.Color(255, 0, 204));
+        tituloMenuSerpe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloMenuSerpe.setText("SERPE");
 
         lblBombas.setFont(new java.awt.Font("Reem Kufi", 3, 24)); // NOI18N
         lblBombas.setForeground(new java.awt.Color(0, 0, 0));
@@ -275,14 +651,22 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        puntosObtidos.setBackground(new java.awt.Color(0, 204, 255));
+        puntosObtidos.setFont(new java.awt.Font("Miriam Libre", 3, 24)); // NOI18N
+        puntosObtidos.setForeground(new java.awt.Color(153, 0, 204));
+        puntosObtidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        puntosObtidos.setText("0");
+        puntosObtidos.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(102, 51, 0)));
+        puntosObtidos.setOpaque(true);
+
+        lblPuntuacion.setFont(new java.awt.Font("Reem Kufi", 3, 24)); // NOI18N
+        lblPuntuacion.setForeground(new java.awt.Color(0, 255, 255));
+        lblPuntuacion.setText("PUNTUACIÓN");
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(titulo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,24 +677,35 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(tempoXogado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(71, 71, 71))
                     .addGroup(menuLayout.createSequentialGroup()
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(bPausa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTempo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(lblFroitas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(lblBombas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(froitasComidas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPuntuacion)
+                            .addComponent(puntosObtidos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFroitas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBombas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(froitasComidas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tituloMenuSerpe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bPausa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        menuLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bombasComidas, froitasComidas, lblBombas, lblFroitas, lblTempo, tempoXogado});
+        menuLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bombasComidas, froitasComidas, lblBombas, lblFroitas, lblPuntuacion, lblTempo, puntosObtidos, tempoXogado});
 
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(titulo2)
-                .addGap(70, 70, 70)
+                .addGap(21, 21, 21)
+                .addComponent(tituloMenuSerpe)
+                .addGap(33, 33, 33)
                 .addComponent(bPausa)
+                .addGap(40, 40, 40)
+                .addComponent(lblPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(puntosObtidos, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(lblFroitas, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
@@ -323,7 +718,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(lblTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(tempoXogado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
         panelXogo.setLocation(250, 0);
@@ -338,7 +733,11 @@ public class Interface extends javax.swing.JFrame {
         });
 
         imagen.setLocation(0, 0);
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/TableroSerpe.jpg"))); // NOI18N
+        try{
+            imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/TableroSerpe.jpg"))); // NOI18N
+        }catch (NullPointerException e){
+            JOptionPane.showMessageDialog(this, "Erro ao cargar o tablero do Xogo.");
+        }
 
         panelFinXogo.setLocation(200, 200);
         panelFinXogo.setVisible(false);
@@ -348,11 +747,11 @@ public class Interface extends javax.swing.JFrame {
         panelFinXogo.setMinimumSize(new java.awt.Dimension(500, 500));
         panelFinXogo.setPreferredSize(new java.awt.Dimension(500, 500));
 
-        titulo3.setBackground(new java.awt.Color(153, 0, 153));
-        titulo3.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
-        titulo3.setForeground(new java.awt.Color(255, 0, 204));
-        titulo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo3.setText("FIN DO XOGO");
+        tituloFinXogo.setBackground(new java.awt.Color(153, 0, 153));
+        tituloFinXogo.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
+        tituloFinXogo.setForeground(new java.awt.Color(255, 0, 204));
+        tituloFinXogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloFinXogo.setText("FIN DO XOGO");
 
         bPantallaInicial.setBackground(new java.awt.Color(102, 204, 255));
         bPantallaInicial.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
@@ -400,24 +799,28 @@ public class Interface extends javax.swing.JFrame {
             panelFinXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFinXogoLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(titulo3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFinXogoLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(panelFinXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bGardarPuntuacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bNovaPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bPantallaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(93, 93, 93))
+                .addGroup(panelFinXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFinXogoLayout.createSequentialGroup()
+                        .addComponent(tituloFinXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(128, 128, 128))
+                    .addGroup(panelFinXogoLayout.createSequentialGroup()
+                        .addGroup(panelFinXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bPantallaInicial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(bNovaPartida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bGardarPuntuacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
+
+        panelFinXogoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bGardarPuntuacion, bNovaPartida, bPantallaInicial});
+
         panelFinXogoLayout.setVerticalGroup(
             panelFinXogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFinXogoLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(titulo3)
-                .addGap(53, 53, 53)
+                .addComponent(tituloFinXogo)
+                .addGap(55, 55, 55)
                 .addComponent(bPantallaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addComponent(bNovaPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(bGardarPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,16 +871,97 @@ public class Interface extends javax.swing.JFrame {
 
         getContentPane().add(juego, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        panelPuntuacions.setVisible(false);
+        panelPuntuacions.setBackground(new java.awt.Color(182, 255, 182));
+        panelPuntuacions.setBorder(javax.swing.BorderFactory.createMatteBorder(7, 7, 7, 7, new java.awt.Color(80, 40, 0)));
+        panelPuntuacions.setMaximumSize(new java.awt.Dimension(1150, 900));
+        panelPuntuacions.setMinimumSize(new java.awt.Dimension(1150, 900));
+        panelPuntuacions.setPreferredSize(new java.awt.Dimension(1150, 900));
+
+        tituloSerpe1.setBackground(new java.awt.Color(153, 0, 153));
+        tituloSerpe1.setFont(new java.awt.Font("Trebuchet MS", 3, 70)); // NOI18N
+        tituloSerpe1.setForeground(new java.awt.Color(153, 0, 153));
+        tituloSerpe1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloSerpe1.setText("PUNTUACIÓNS");
+
+        bVolverInicio.setBackground(new java.awt.Color(102, 204, 255));
+        bVolverInicio.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bVolverInicio.setForeground(new java.awt.Color(102, 0, 102));
+        bVolverInicio.setText("VOLVER A PANTALLA INICIAL");
+        bVolverInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVolverInicioActionPerformed(evt);
+            }
+        });
+
+        jTablePuntuacions.setBackground(new java.awt.Color(0, 204, 51));
+        jTablePuntuacions.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
+        jTablePuntuacions.setForeground(new java.awt.Color(0, 0, 204));
+        jTablePuntuacions.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "JUGADOR", "PUNTUACIÓN", "FROITAS", "BOMBAS", "TEMPO", "DATA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTablePuntuacions.setFocusable(false);
+        jTablePuntuacions.setGridColor(new java.awt.Color(204, 0, 0));
+        jTablePuntuacions.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jTablePuntuacions.setSelectionForeground(new java.awt.Color(0, 0, 204));
+        jTablePuntuacions.setShowGrid(true);
+        jScrollPane1.setViewportView(jTablePuntuacions);
+        if (jTablePuntuacions.getColumnModel().getColumnCount() > 0) {
+            jTablePuntuacions.getColumnModel().getColumn(0).setResizable(false);
+            jTablePuntuacions.getColumnModel().getColumn(1).setResizable(false);
+            jTablePuntuacions.getColumnModel().getColumn(2).setResizable(false);
+            jTablePuntuacions.getColumnModel().getColumn(3).setResizable(false);
+            jTablePuntuacions.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        javax.swing.GroupLayout panelPuntuacionsLayout = new javax.swing.GroupLayout(panelPuntuacions);
+        panelPuntuacions.setLayout(panelPuntuacionsLayout);
+        panelPuntuacionsLayout.setHorizontalGroup(
+            panelPuntuacionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPuntuacionsLayout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(tituloSerpe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(295, 295, 295))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPuntuacionsLayout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(bVolverInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(359, 359, 359))
+            .addGroup(panelPuntuacionsLayout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(jScrollPane1)
+                .addGap(230, 230, 230))
+        );
+        panelPuntuacionsLayout.setVerticalGroup(
+            panelPuntuacionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPuntuacionsLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(tituloSerpe1)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addComponent(bVolverInicio)
+                .addGap(110, 110, 110))
+        );
+
+        getContentPane().add(panelPuntuacions, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelXogoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelXogoKeyPressed
-        // TODO add your handling code here:
-        /*if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            irMenuPrincipal();
-            reiniciar();
-            sound.getCancion().stop();
-        }*/
         if (bPausa.isSelected()){
             if (evt.getKeyCode()==KeyEvent.VK_ESCAPE){
                 despausar();
@@ -503,7 +987,6 @@ public class Interface extends javax.swing.JFrame {
             if (evt.getKeyCode()==KeyEvent.VK_ESCAPE){
                 pausar();
             }
-            
         }
     }//GEN-LAST:event_panelXogoKeyPressed
 
@@ -546,8 +1029,91 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_bNovaPartidaActionPerformed
 
     private void bGardarPuntuacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGardarPuntuacionActionPerformed
-        // TODO add your handling code here:
+        jDGardarPuntuacion.setVisible(true);
     }//GEN-LAST:event_bGardarPuntuacionActionPerformed
+
+    private void bIniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIniciarSesiónActionPerformed
+        jDSesion.setVisible(true);
+        panelInicioSesion.setVisible(true);
+        panelRegistrarse.setVisible(false);
+        lblUsuarioNonEncontrado.setText("");
+    }//GEN-LAST:event_bIniciarSesiónActionPerformed
+
+    private void bRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRegistrarseActionPerformed
+        jDSesion.setVisible(true);
+        panelInicioSesion.setVisible(false);
+        panelRegistrarse.setVisible(true);
+        lblUsuarioOcupado.setText("");
+    }//GEN-LAST:event_bRegistrarseActionPerformed
+
+    private void bConfirmarGardarPuntuacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarGardarPuntuacionActionPerformed
+        boolean gardado=conexionBD.gardarDatos(xogo.getJugador(), xogo.getPuntuacion(), xogo.getFroitasComidas(), xogo.getBombasComidas(), xogo.getTempo());
+        if (gardado){
+            jDGardarPuntuacion.setVisible(false);
+            bGardarPuntuacion.setEnabled(false);
+            bGardarPuntuacion.setText("PUNTUACIÓN GARDADA");
+        }
+        lblUsuarioNonEncontrado.setText("");
+        lblUsuarioOcupado.setText("");
+    }//GEN-LAST:event_bConfirmarGardarPuntuacionActionPerformed
+
+    private void bConfirmarInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarInicioSesionActionPerformed
+        boolean usuarioRegistrado = conexionBD.comprobarUsuario(usuario.getText());
+        boolean inicioSesion = conexionBD.iniciarSesion(usuario.getText(), contrasinal.getText());
+        if (usuarioRegistrado){
+            if (inicioSesion){
+                jDSesion.setVisible(false);
+                lblUsuarioNonEncontrado.setText("");
+                xogo.setJugador(usuario.getText());
+                lblComoUsuario.setText("Como " + xogo.getJugador());
+            }
+            else{
+                lblUsuarioNonEncontrado.setText("Contrasinal incorrecto.");
+            }
+        }
+        else{
+            lblUsuarioNonEncontrado.setText("O usuario non existe.");
+        }
+        usuario.setText("");
+        contrasinal.setText("");
+    }//GEN-LAST:event_bConfirmarInicioSesionActionPerformed
+
+    private void bConfirmarRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarRegistrarseActionPerformed
+        boolean registro = conexionBD.registrarse(usuarioNovo.getText(), contrasinalNovo.getText());
+        if (registro){
+            jDSesion.setVisible(false);
+            lblUsuarioOcupado.setText("");
+        }
+        else {
+            lblUsuarioOcupado.setText("Nome de usuario ocupado.");
+        }
+        usuarioNovo.setText("");
+        contrasinalNovo.setText("");
+    }//GEN-LAST:event_bConfirmarRegistrarseActionPerformed
+
+    private void bPuntuacionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPuntuacionsActionPerformed
+        pantallaInicial.setVisible(false);
+        panelPuntuacions.setVisible(true);
+        DefaultTableModel tablaPuntuacions = (DefaultTableModel) jTablePuntuacions.getModel();
+        for (int i = tablaPuntuacions.getRowCount()-1; i >=0 ; i--) {
+            tablaPuntuacions.removeRow(i);
+        }
+        ArrayList<Object> partidas = conexionBD.obterPuntuacións();
+        Iterator<Object> iterPartidas =partidas.iterator();
+        while (iterPartidas.hasNext()){
+            tablaPuntuacions.addRow((Object[]) iterPartidas.next());
+        }
+        jTablePuntuacions.setModel(tablaPuntuacions);
+    }//GEN-LAST:event_bPuntuacionsActionPerformed
+
+    private void bSairXogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairXogoActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_bSairXogoActionPerformed
+
+    private void bVolverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVolverInicioActionPerformed
+        pantallaInicial.setVisible(true);
+        panelPuntuacions.setVisible(false);
+    }//GEN-LAST:event_bVolverInicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -597,6 +1163,8 @@ public class Interface extends javax.swing.JFrame {
         pausar();
         bPausa.setVisible(false);
         panelXogo.setFocusable(false);
+        bGardarPuntuacion.setEnabled(true);
+        bGardarPuntuacion.setText("GARDAR PUNTUACIÓN");
     }
     
     private void pausar(){
@@ -623,7 +1191,7 @@ public class Interface extends javax.swing.JFrame {
         xogo.setFroitasComidas(0);
         xogo.setBombasComidas(0);
         xogo.setTempo(0);
-        //engadirPuntos(0);
+        establecerPuntos(0);
         engadirFroitas(0);
         engadirBombas(0);
         engadirTempo(0);
@@ -675,40 +1243,82 @@ public class Interface extends javax.swing.JFrame {
     public void engadirBombas(int bombas){
         bombasComidas.setText(bombas+"");
     }
-    /*
-    private void engadirPuntos(int puntos){
-        puntosObtidos.setText(puntos+"");
-    }*/
     
-    public void engadirTempo(int tempoXogo){
+    public void establecerPuntos(int puntos){
+        puntosObtidos.setText(puntos+"");
+    }
+    
+    private void engadirTempo(int tempoXogo){
         tempoXogado.setText(tempoXogo+"");
+        xogo.setTempo(tempoXogo);
+    }
+    
+    @Override
+    public Image getIconImage(){
+        Image retValue = null;
+        try{
+            retValue = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/recursos/CabezaSerpe.png"));
+        }catch (NullPointerException e){}
+        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bClasico;
+    private javax.swing.JButton bConfirmarGardarPuntuacion;
+    private javax.swing.JButton bConfirmarInicioSesion;
+    private javax.swing.JButton bConfirmarRegistrarse;
     private javax.swing.JButton bEsfera;
     private javax.swing.JButton bGardarPuntuacion;
     private javax.swing.JButton bIniciar;
+    private javax.swing.JButton bIniciarSesión;
     private javax.swing.JButton bModoXogo;
     private javax.swing.JButton bNovaPartida;
     private javax.swing.JButton bPantallaInicial;
     private javax.swing.JToggleButton bPausa;
+    private javax.swing.JButton bPuntuacions;
+    private javax.swing.JButton bRegistrarse;
+    private javax.swing.JButton bSairXogo;
+    private javax.swing.JButton bVolverInicio;
     private javax.swing.JLabel bombasComidas;
+    private javax.swing.JTextField contrasinal;
+    private javax.swing.JTextField contrasinalNovo;
     private javax.swing.JLabel froitasComidas;
     private javax.swing.JLabel imagen;
+    private javax.swing.JDialog jDGardarPuntuacion;
     private javax.swing.JDialog jDModoXogo;
+    private javax.swing.JDialog jDSesion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTablePuntuacions;
     private javax.swing.JPanel juego;
     private javax.swing.JLabel lblBombas;
+    private javax.swing.JLabel lblComoUsuario;
+    private javax.swing.JLabel lblContrasinal;
+    private javax.swing.JLabel lblContrasinalNovo;
     private javax.swing.JLabel lblFroitas;
+    private javax.swing.JLabel lblPuntuacion;
     private javax.swing.JLabel lblTempo;
+    private javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel lblUsuarioNonEncontrado;
+    private javax.swing.JLabel lblUsuarioNovo;
+    private javax.swing.JLabel lblUsuarioOcupado;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel panelFinXogo;
+    private javax.swing.JPanel panelGardarPuntuacion;
+    private javax.swing.JPanel panelInicioSesion;
     private javax.swing.JPanel panelModoXogo;
+    private javax.swing.JPanel panelPuntuacions;
+    private javax.swing.JPanel panelRegistrarse;
     private javax.swing.JPanel panelXogo;
     private javax.swing.JPanel pantallaInicial;
+    private javax.swing.JLabel puntosObtidos;
     private javax.swing.JLabel tempoXogado;
-    private javax.swing.JLabel titulo;
-    private javax.swing.JLabel titulo2;
-    private javax.swing.JLabel titulo3;
+    private javax.swing.JLabel tituloFinXogo;
+    private javax.swing.JLabel tituloInicioSesion;
+    private javax.swing.JLabel tituloMenuSerpe;
+    private javax.swing.JLabel tituloRegistrarse;
+    private javax.swing.JLabel tituloSerpe;
+    private javax.swing.JLabel tituloSerpe1;
+    private javax.swing.JTextField usuario;
+    private javax.swing.JTextField usuarioNovo;
     // End of variables declaration//GEN-END:variables
 }

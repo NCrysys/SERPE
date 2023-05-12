@@ -6,7 +6,6 @@ package Xogo;
 
 import InterfaceGrafica.Interface;
 import Xogo.Cadrados.Cadrado;
-import Xogo.Cadrados.Serpe;
 import Xogo.Cadrados.Comestibles.Bomba;
 import Xogo.Cadrados.Comestibles.Comestible;
 import Xogo.Cadrados.Comestibles.Maza;
@@ -25,6 +24,7 @@ public class Xogo {
     private Bomba bomba;
     private Comestible froita;
     private HashMap<Integer,Comestible> froitas;
+    private String jugador = "invitado";
     private int puntuacion=0;
     private int tempo=0;
     private int froitasComidas=0;
@@ -72,6 +72,13 @@ public class Xogo {
     public void setBombasComidas(int bombasComidas) {
         this.bombasComidas = bombasComidas;
     }
+    public String getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(String jugador) {
+        this.jugador = jugador;
+    }
     public Serpe getSerpe() {
         return serpe;
     }
@@ -105,28 +112,36 @@ public class Xogo {
     
     public void voltearSerpeArriba(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()-cabeza.getTAMANO()) && comprobarTeletransporte()){
+        if (cabeza.getCoordY()==0 && !comprobarPosicionSerpe(cabeza.getCoordX(), MAXY-cabeza.getTAMANO())){
+        }
+        else if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()-cabeza.getTAMANO())){
             serpe.voltearArriba();
         }
     }
     
     public void voltearSerpeDereita(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX()+cabeza.getTAMANO(), cabeza.getCoordY()) && comprobarTeletransporte()){
+        if (cabeza.getCoordX()==MAXX-cabeza.getTAMANO() && !comprobarPosicionSerpe(0, cabeza.getCoordY())){
+        }
+        else if (comprobarPosicionSerpe(cabeza.getCoordX()+cabeza.getTAMANO(), cabeza.getCoordY())){
             serpe.voltearDereita();
         }
     }
     
     public void voltearSerpeAbaixo(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()+cabeza.getTAMANO()) && comprobarTeletransporte()){
+        if (cabeza.getCoordY()==MAXY-cabeza.getTAMANO() && !comprobarPosicionSerpe(cabeza.getCoordX(), 0)){
+        }
+        else if (comprobarPosicionSerpe(cabeza.getCoordX(), cabeza.getCoordY()+cabeza.getTAMANO())){
             serpe.voltearAbaixo();
         }
     }
     
     public void voltearSerpeEsquerda(){
         Cadrado cabeza = serpe.getCorpo().get(0);
-        if (comprobarPosicionSerpe(cabeza.getCoordX()-cabeza.getTAMANO(), cabeza.getCoordY()) && comprobarTeletransporte()){
+        if (cabeza.getCoordX()==0 && !comprobarPosicionSerpe(MAXX-cabeza.getTAMANO(), cabeza.getCoordY())){
+        }
+        else if (comprobarPosicionSerpe(cabeza.getCoordX()-cabeza.getTAMANO(), cabeza.getCoordY())){
             serpe.voltearEsquerda();
         }
     }
@@ -276,23 +291,27 @@ public class Xogo {
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordX()==froita.getCoordX() && cabeza.getCoordY()==froita.getCoordY()){
             comerFroita();
-            puntuacion+=10;
         }
         /*else if (cabeza.getCoordX()==bomba.getCoordX() && cabeza.getCoordY()==bomba.getCoordY()){
             comerBomba();
-            puntuacion-=15;
         }*/
     }
     
     private void comerFroita(){
-        serpe.aumentarLonxitude();
-        interfaz.borrarCadrado(froita);
         froitasComidas++;
         interfaz.engadirFroitas(froitasComidas);
+        puntuacion+=10;
+        interfaz.establecerPuntos(puntuacion);
+        serpe.aumentarLonxitude();
+        interfaz.borrarCadrado(froita);
         xerarFroita();
     }
     
     private void comerBomba(){
+        bombasComidas++;
+        interfaz.engadirBombas(bombasComidas);
+        puntuacion-=15;
+        interfaz.establecerPuntos(puntuacion);
         serpe.reducirLonxitude();
     }
 }

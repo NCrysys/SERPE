@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Xogo.Cadrados;
+package Xogo;
 
+import Xogo.Cadrados.CadradoCorpo;
 import Xogo.Xogo;
-import java.awt.Color;
+import static java.awt.Color.CYAN;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -79,10 +81,16 @@ public class Serpe {
     }
     
     private void establecerCabeza(){
-        cabeza.lblCadrado.setSize(cabeza.TAMANO + 10, cabeza.TAMANO + 10);
+        cabeza.getLblCadrado().setSize(cabeza.getTAMANO() + 10, cabeza.getTAMANO() + 10);
         cabeza.setCoordX(corpo.get(0).getCoordX() - 5);
         cabeza.setCoordY(corpo.get(0).getCoordY() - 5);
-        cabeza.lblCadrado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/CabezaSerpe.png")));
+        try{
+            cabeza.getLblCadrado().setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/CabezaSerpe.png")));
+        }catch (NullPointerException e){
+            cabeza.cor();
+            cabeza.getLblCadrado().setBackground(CYAN);
+            JOptionPane.showMessageDialog(xogo.getInterfaz(), "Erro ao cargar a cabeza da Serpe.");
+        }
     }
     
     public int voltearArriba(){

@@ -4,6 +4,7 @@
  */
 package Xogo.Cadrados;
 
+import Xogo.Serpe;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.BLUE;
 import javax.swing.BorderFactory;
@@ -27,7 +28,7 @@ public class CadradoCorpo extends Cadrado{
      * Establece a posición deste cadrado no cu da Serpe
      */
     @Override
-    protected void establecerPosicion() {
+    public void establecerPosicion() {
         if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordX()-TAMANO){
             setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()-TAMANO);
             setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
