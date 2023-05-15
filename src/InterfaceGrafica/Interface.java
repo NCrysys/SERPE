@@ -112,7 +112,7 @@ public class Interface extends javax.swing.JFrame {
         jDModoXogo.setTitle("Modo de Xogo");
         jDModoXogo.setBackground(new java.awt.Color(182, 255, 182));
         jDModoXogo.setForeground(new java.awt.Color(182, 255, 182));
-        jDModoXogo.setIconImage(getIconImage());
+        jDModoXogo.setIconImage(null);
         jDModoXogo.setLocation(new java.awt.Point(350, 300));
         jDModoXogo.setMinimumSize(new java.awt.Dimension(400, 400));
         jDModoXogo.setResizable(false);
@@ -188,8 +188,10 @@ public class Interface extends javax.swing.JFrame {
         jDGardarPuntuacion.setVisible(false);
         jDGardarPuntuacion.setLocation(350, 100);
         jDGardarPuntuacion.setTitle("Gardar Puntuación");
-        jDGardarPuntuacion.setIconImage(getIconImage());
+        jDGardarPuntuacion.setIconImage(null);
+        jDGardarPuntuacion.setMaximumSize(new java.awt.Dimension(700, 700));
         jDGardarPuntuacion.setMinimumSize(new java.awt.Dimension(700, 700));
+        jDGardarPuntuacion.setPreferredSize(new java.awt.Dimension(700, 700));
         jDGardarPuntuacion.setResizable(false);
 
         panelGardarPuntuacion.setBackground(new java.awt.Color(182, 255, 182));
@@ -288,8 +290,10 @@ public class Interface extends javax.swing.JFrame {
         jDSesion.setVisible(false);
         jDSesion.setLocation(100, 100);
         jDSesion.setTitle("Sesión");
-        jDSesion.setIconImage(getIconImage());
+        jDSesion.setIconImage(null);
+        jDSesion.setMaximumSize(new java.awt.Dimension(500, 500));
         jDSesion.setMinimumSize(new java.awt.Dimension(500, 500));
+        jDSesion.setPreferredSize(new java.awt.Dimension(500, 500));
         jDSesion.setResizable(false);
 
         panelInicioSesion.setVisible(false);
@@ -1260,6 +1264,11 @@ public class Interface extends javax.swing.JFrame {
             retValue = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/recursos/CabezaSerpe.png"));
         }catch (NullPointerException e){}
         return retValue;
+    }
+    
+    public void bloquearBD(){
+        bPuntuacions.setVisible(false);
+        bGardarPuntuacion.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

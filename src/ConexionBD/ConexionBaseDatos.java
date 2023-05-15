@@ -40,6 +40,7 @@ public class ConexionBaseDatos {
             con = DriverManager.getConnection(url, uid, password);
         }catch(SQLException e){
             JOptionPane.showMessageDialog(interfaz, "Erro ao conectar coa base de datos.");
+            interfaz.bloquearBD();
         }
     }
     
@@ -79,6 +80,7 @@ public class ConexionBaseDatos {
             }
         }catch(SQLException e){
             JOptionPane.showMessageDialog(interfaz, "Erro ao ler o usuario da base de datos.");
+            
         }
         return registrado;
     }

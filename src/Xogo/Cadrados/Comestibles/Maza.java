@@ -5,7 +5,8 @@
 package Xogo.Cadrados.Comestibles;
 
 import Xogo.Xogo;
-import java.awt.Color;
+import static java.awt.Color.BLACK;
+import static java.awt.Color.RED;
 import javax.swing.BorderFactory;
 
 /**
@@ -20,8 +21,13 @@ public class Maza extends Comestible{
     
     @Override
     public void cor() {
-        lblCadrado.setBackground(Color.RED);
-        lblCadrado.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        lblCadrado.setBackground(RED);
+        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
         lblCadrado.setOpaque(true);
+    }
+    
+    @Override
+    public void efecto(){
+        
     }
 }

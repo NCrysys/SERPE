@@ -34,7 +34,7 @@ public class Xogo {
     //CONTRUCTOR
     public Xogo(Interface interfaz) {
         this.interfaz = interfaz;
-        xerarConxuntoFroitas();
+        xerarComestibles();
         serpe = new Serpe(this);
     }
     
@@ -108,6 +108,7 @@ public class Xogo {
     public void iniciarPartida(){
         serpe.formarSerpe();
         xerarFroita();
+        xerarBomba();
     }
     
     public void voltearSerpeArriba(){
@@ -152,10 +153,6 @@ public class Xogo {
         }
     }
     
-    private void finXogo(){
-        interfaz.finDoXogo();
-    }
-    
     public void borrarCadrados(){
         serpe.setIterCorpo(serpe.getCorpo().iterator());
         while (serpe.getIterCorpo().hasNext()){
@@ -163,7 +160,7 @@ public class Xogo {
         }
         interfaz.borrarCadrado(serpe.getCabeza());
         interfaz.borrarCadrado(froita);
-        //interfaz.borrarCadrado(bomba);
+        interfaz.borrarCadrado(bomba);
         serpe.borrarSerpe();
     }
     
@@ -184,15 +181,15 @@ public class Xogo {
             xCabeza = cabeza.getCoordX()-cabeza.getTAMANO();
         }
         if(comprobarPosicionValida(xCabeza, yCabeza)){
+            comer(xCabeza, yCabeza);
             serpe.avanzar();
-            comer();
             pintarSerpe();
         }
         else if (!modoClasico && !comprobarBordes(xCabeza, yCabeza) && comprobarTeletransporte()){
             teletransporte(xCabeza, yCabeza);
         }
         else{
-            finXogo();
+            interfaz.finDoXogo();
         }
     }
     
@@ -231,7 +228,7 @@ public class Xogo {
             cabeza.setCoordY(0);
         }
         serpe.avanzarCabeza();
-        comer();
+        comer(cabeza.getCoordX(), cabeza.getCoordY());
     }
     
     public boolean comprobarPosicionValida(int x, int y){
@@ -250,10 +247,10 @@ public class Xogo {
             if(cadradoCorpo==serpe.getCorpo().get(serpe.getCorpo().size()-1)){
                 if(froita.getCoordX()==cadradoCorpo.getCoordX() && froita.getCoordY()==cadradoCorpo.getCoordY()){
                     posicionValida=false;
-                }/*
+                }
                 if(bomba.getCoordX()==cadradoCorpo.getCoordX() && bomba.getCoordY()==cadradoCorpo.getCoordY()){
                     posicionValida=false;
-                }*/
+                }
             }
             else if(x==cadradoCorpo.getCoordX() && y==cadradoCorpo.getCoordY()){
                 posicionValida=false;
@@ -270,11 +267,12 @@ public class Xogo {
         return posicionValida;
     }
     
-    public void xerarConxuntoFroitas(){
+    public void xerarComestibles(){
         froitas=new HashMap();
         froitas.put(1, new Maza(this));
         froitas.put(2, new Maza(this));
         froitas.put(3, new Maza(this));
+        bomba = new Bomba(this);
     }
     
     /**
@@ -287,22 +285,26 @@ public class Xogo {
         interfaz.pintarCadrado(froita);
     }
     
-    private void comer(){
-        Cadrado cabeza = serpe.getCorpo().get(0);
-        if (cabeza.getCoordX()==froita.getCoordX() && cabeza.getCoordY()==froita.getCoordY()){
+    public void xerarBomba(){
+        bomba.establecerPosicion();
+        interfaz.pintarCadrado(bomba);
+    }
+    
+    private void comer(int x, int y){
+        if (x==froita.getCoordX() && y==froita.getCoordY()){
             comerFroita();
         }
-        /*else if (cabeza.getCoordX()==bomba.getCoordX() && cabeza.getCoordY()==bomba.getCoordY()){
+        else if (x==bomba.getCoordX() && y==bomba.getCoordY()){
             comerBomba();
-        }*/
+        }
     }
     
     private void comerFroita(){
         froitasComidas++;
         interfaz.engadirFroitas(froitasComidas);
         puntuacion+=10;
-        interfaz.establecerPuntos(puntuacion);
         serpe.aumentarLonxitude();
+        interfaz.establecerPuntos(puntuacion);
         interfaz.borrarCadrado(froita);
         xerarFroita();
     }
@@ -310,8 +312,12 @@ public class Xogo {
     private void comerBomba(){
         bombasComidas++;
         interfaz.engadirBombas(bombasComidas);
-        puntuacion-=15;
+        bomba.efecto();
         interfaz.establecerPuntos(puntuacion);
-        serpe.reducirLonxitude();
+        interfaz.borrarCadrado(bomba);
+        xerarBomba();
+        if(puntuacion<0 || serpe.getCorpo().size()<=1){
+            interfaz.finDoXogo();
+        }
     }
 }

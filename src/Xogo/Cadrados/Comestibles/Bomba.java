@@ -5,6 +5,9 @@
 package Xogo.Cadrados.Comestibles;
 
 import Xogo.Xogo;
+import static java.awt.Color.BLACK;
+import static java.awt.Color.WHITE;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -18,6 +21,18 @@ public class Bomba extends Comestible{
     
     @Override
     public void cor() {
-        
+        lblCadrado.setBackground(BLACK);
+        lblCadrado.setBorder(BorderFactory.createLineBorder(WHITE));
+        lblCadrado.setOpaque(true);
+    }
+    
+    @Override
+    public void efecto(){
+        for (int i = 0; i < xogo.getBombasComidas(); i++) {
+            xogo.setPuntuacion(xogo.getPuntuacion()-15);
+        }
+        for (int i = 0; i < xogo.getBombasComidas()*3 && xogo.getSerpe().getCorpo().size()>1; i++) {
+            xogo.getSerpe().reducirLonxitude();
+        }
     }
 }

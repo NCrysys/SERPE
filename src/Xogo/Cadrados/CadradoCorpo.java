@@ -29,22 +29,8 @@ public class CadradoCorpo extends Cadrado{
      */
     @Override
     public void establecerPosicion() {
-        if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordX()-TAMANO){
-            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()-TAMANO);
-            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
-        }
-        else if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordX()+TAMANO){
-            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX()+TAMANO);
-            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
-        }
-        else if(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY()==serpe.getCorpo().get(serpe.getCorpo().size()-2).getCoordY()+TAMANO){
-            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
-            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY()+TAMANO);
-        }
-        else {
-            setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
-            setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY()-TAMANO);
-        }
+        setCoordX(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordX());
+        setCoordY(serpe.getCorpo().get(serpe.getCorpo().size()-1).getCoordY());
     }
     
     /**
