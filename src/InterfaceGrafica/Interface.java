@@ -1226,6 +1226,9 @@ public class Interface extends javax.swing.JFrame {
                 tempoXogo++;
                 xogo.setTempo(tempoXogo);
                 engadirTempo(tempoXogo);
+                if (tempoXogo%10==0){
+                    xogo.xerarBomba();
+                }
             }
         });
     }
