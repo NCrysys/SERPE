@@ -9,6 +9,8 @@ import Xogo.Cadrados.Cadrado;
 import Xogo.Cadrados.Comestibles.Bomba;
 import Xogo.Cadrados.Comestibles.Comestible;
 import Xogo.Cadrados.Comestibles.Maza;
+import Xogo.Cadrados.Comestibles.Pemento;
+import Xogo.Cadrados.Comestibles.Sandia;
 import java.util.HashMap;
 
 /**
@@ -27,6 +29,7 @@ public class Xogo {
     private String jugador = "invitado";
     private int puntuacion=0;
     private int tempo=0;
+    private int velocidade = 500;
     private int froitasComidas=0;
     private int bombasComidas=0;
     private boolean modoClasico=true;
@@ -39,45 +42,17 @@ public class Xogo {
     }
     
     //GETTER E SETTER
-    public Interface getInterfaz() {
-        return interfaz;
-    }
     public int getMAXX() {
         return MAXX;
     }
-    public int getMAXY() {
+    public int getMAXY() {    
         return MAXY;
     }
-    public int getPuntuacion() {
-        return puntuacion;
+    public Interface getInterfaz() {
+        return interfaz;
     }
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
-    }
-    public int getTempo() {
-        return tempo;
-    }
-    public void setTempo(int tempo) {
-        this.tempo = tempo;
-    }
-    public int getFroitasComidas() {
-        return froitasComidas;
-    }
-    public void setFroitasComidas(int froitasComidas) {
-        this.froitasComidas = froitasComidas;
-    }
-    public int getBombasComidas() {
-        return bombasComidas;
-    }
-    public void setBombasComidas(int bombasComidas) {
-        this.bombasComidas = bombasComidas;
-    }
-    public String getJugador() {
-        return jugador;
-    }
-
-    public void setJugador(String jugador) {
-        this.jugador = jugador;
+    public void setInterfaz(Interface interfaz) {
+        this.interfaz = interfaz;
     }
     public Serpe getSerpe() {
         return serpe;
@@ -97,6 +72,48 @@ public class Xogo {
     public void setFroita(Comestible froita) {
         this.froita = froita;
     }
+    public HashMap<Integer, Comestible> getFroitas() {
+        return froitas;
+    }
+    public void setFroitas(HashMap<Integer, Comestible> froitas) {
+        this.froitas = froitas;
+    }
+    public String getJugador() {
+        return jugador;
+    }
+    public void setJugador(String jugador) {
+        this.jugador = jugador;
+    }
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+    public int getTempo() {
+        return tempo;
+    }
+    public void setTempo(int tempo) {
+        this.tempo = tempo;
+    }
+    public int getVelocidade() {
+        return velocidade;
+    }
+    public void setVelocidade(int velocidade) {
+        this.velocidade = velocidade;
+    }
+    public int getFroitasComidas() {
+        return froitasComidas;
+    }
+    public void setFroitasComidas(int froitasComidas) {
+        this.froitasComidas = froitasComidas;
+    }
+    public int getBombasComidas() {
+        return bombasComidas;
+    }
+    public void setBombasComidas(int bombasComidas) {
+        this.bombasComidas = bombasComidas;
+    }
     public boolean isModoClasico() {
         return modoClasico;
     }
@@ -104,11 +121,12 @@ public class Xogo {
         this.modoClasico = modoClasico;
     }
     
+    
     //MÉTODOS
     public void iniciarPartida(){
         serpe.formarSerpe();
         xerarFroita();
-        xerarBomba();
+        bomba.desaparecer();
     }
     
     public void voltearSerpeArriba(){
@@ -151,17 +169,6 @@ public class Xogo {
         for (int i = 0; i < serpe.getCorpo().size(); i++) {
             interfaz.pintarCadrado(serpe.getCorpo().get(i));
         }
-    }
-    
-    public void borrarCadrados(){
-        serpe.setIterCorpo(serpe.getCorpo().iterator());
-        while (serpe.getIterCorpo().hasNext()){
-            interfaz.borrarCadrado(serpe.getIterCorpo().next());
-        }
-        interfaz.borrarCadrado(serpe.getCabeza());
-        interfaz.borrarCadrado(froita);
-        interfaz.borrarCadrado(bomba);
-        serpe.borrarSerpe();
     }
     
     public void avanzarSerpe(){
@@ -267,11 +274,24 @@ public class Xogo {
         return posicionValida;
     }
     
+    public boolean comprobarPosicionComestibles(int x, int y){
+        boolean posicionValida=true;
+        if (froita.getCoordX()==bomba.getCoordX() && froita.getCoordY()==bomba.getCoordY()){
+            posicionValida=false;
+        }
+        return posicionValida;
+    }
+    
     public void xerarComestibles(){
         froitas=new HashMap();
         froitas.put(1, new Maza(this));
         froitas.put(2, new Maza(this));
         froitas.put(3, new Maza(this));
+        froitas.put(4, new Maza(this));
+        froitas.put(5, new Pemento(this));
+        froitas.put(6, new Pemento(this));
+        froitas.put(7, new Pemento(this));
+        froitas.put(8, new Sandia(this));
         bomba = new Bomba(this);
     }
     
@@ -279,7 +299,7 @@ public class Xogo {
      * Establecese aleatoriamente un Comestible para o campo froita.
      */
     public void xerarFroita(){
-        int comida = (int) Math.floor(Math.random() * (3 - 1 + 1) + 1);
+        int comida = (int) Math.floor(Math.random() * (8 - 1 + 1) + 1);
         froita = froitas.get(comida);
         froita.establecerPosicion();
         interfaz.pintarCadrado(froita);
@@ -302,8 +322,7 @@ public class Xogo {
     private void comerFroita(){
         froitasComidas++;
         interfaz.engadirFroitas(froitasComidas);
-        puntuacion+=10;
-        serpe.aumentarLonxitude();
+        froita.efecto();
         interfaz.establecerPuntos(puntuacion);
         interfaz.borrarCadrado(froita);
         xerarFroita();
@@ -315,9 +334,44 @@ public class Xogo {
         bomba.efecto();
         interfaz.establecerPuntos(puntuacion);
         interfaz.borrarCadrado(bomba);
-        xerarBomba();
-        if(puntuacion<0 || serpe.getCorpo().size()<=1){
+        bomba.desaparecer();
+        if(puntuacion<0 || serpe.getLonxitudeSerpe()<=1){
             interfaz.finDoXogo();
         }
+    }
+    
+    public void aumentarLonxitudeSerpe(){
+        serpe.aumentarLonxitude();
+    }
+    
+    public void modificarVelocidadeSerpe(int veloz){
+        velocidade-=veloz;
+        if(velocidade<150){
+            velocidade=150;
+        }
+        else if(velocidade>500){
+            velocidade=500;
+        }
+        interfaz.modificarTimerVelocidade(velocidade);
+    }
+    
+    public void restaurarXogo(){
+        setPuntuacion(0);
+        setFroitasComidas(0);
+        setBombasComidas(0);
+        setTempo(0);
+        setVelocidade(500);
+        borrarCadrados();
+    }
+    
+    public void borrarCadrados(){
+        serpe.setIterCorpo(serpe.getCorpo().iterator());
+        while (serpe.getIterCorpo().hasNext()){
+            interfaz.borrarCadrado(serpe.getIterCorpo().next());
+        }
+        interfaz.borrarCadrado(serpe.getCabeza());
+        interfaz.borrarCadrado(froita);
+        interfaz.borrarCadrado(bomba);
+        serpe.borrarSerpe();
     }
 }
