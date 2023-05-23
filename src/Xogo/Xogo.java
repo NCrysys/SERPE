@@ -284,14 +284,17 @@ public class Xogo {
     
     public void xerarComestibles(){
         froitas=new HashMap();
-        froitas.put(1, new Maza(this));
-        froitas.put(2, new Maza(this));
-        froitas.put(3, new Maza(this));
-        froitas.put(4, new Maza(this));
-        froitas.put(5, new Pemento(this));
-        froitas.put(6, new Pemento(this));
-        froitas.put(7, new Pemento(this));
-        froitas.put(8, new Sandia(this));
+        Comestible maza = new Maza(this);
+        Comestible pemento = new Pemento(this);
+        Comestible sandia = new Sandia(this);
+        froitas.put(1, maza);
+        froitas.put(2, maza);
+        froitas.put(3, maza);
+        froitas.put(4, maza);
+        froitas.put(5, pemento);
+        froitas.put(6, pemento);
+        froitas.put(7, pemento);
+        froitas.put(8, sandia);
         bomba = new Bomba(this);
     }
     

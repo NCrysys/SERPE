@@ -5,22 +5,22 @@
 package Xogo.Cadrados.Comestibles;
 
 import Xogo.Cadrados.Cadrado;
+import Xogo.Cadrados.Imaginable;
 import Xogo.Xogo;
 
 /**
  *
  * @author a22noellr
  */
-public abstract class Comestible extends Cadrado{
+public abstract class Comestible extends Cadrado implements Imaginable{
     Xogo xogo;
     
     public Comestible(Xogo xogo) {
         this.xogo=xogo;
         lblCadrado = new javax.swing.JLabel();
         lblCadrado.setSize(TAMANO, TAMANO);
-        cor();
+        imaxe();
     }
-    
     
     @Override
     public void establecerPosicion() {

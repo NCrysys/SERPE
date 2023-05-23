@@ -8,6 +8,7 @@ import Xogo.Xogo;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.GREEN;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,16 @@ public class Sandia extends Comestible{
         lblCadrado.setBackground(GREEN);
         lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
         lblCadrado.setOpaque(true);
+    }
+
+    @Override
+    public void imaxe() {
+        try{
+            getLblCadrado().setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Sandia.png")));
+        }catch (NullPointerException e){
+            cor();
+            JOptionPane.showMessageDialog(xogo.getInterfaz(), "Erro ao cargar a imaxe da Sandía.");
+        }
     }
     
     @Override

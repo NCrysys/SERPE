@@ -8,6 +8,7 @@ import Xogo.Xogo;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.WHITE;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +34,16 @@ public class Bomba extends Comestible{
         }
         for (int i = 0; i < xogo.getBombasComidas()*3 && xogo.getSerpe().getLonxitudeSerpe()>1; i++) {
             xogo.getSerpe().reducirLonxitude();
+        }
+    }
+
+    @Override
+    public void imaxe() {
+        try{
+            getLblCadrado().setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Bomba.png")));
+        }catch (NullPointerException e){
+            cor();
+            JOptionPane.showMessageDialog(xogo.getInterfaz(), "Erro ao cargar a imaxe da Bomba.");
         }
     }
     
