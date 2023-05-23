@@ -29,7 +29,6 @@ public class Interface extends javax.swing.JFrame {
     private ConexionBaseDatos conexionBD;
     private Timer timer;
     private Timer tempoXogo;
-    private int delay = 500;
     /**
      * Creates new form Interface
      */
@@ -65,18 +64,18 @@ public class Interface extends javax.swing.JFrame {
         usuario = new javax.swing.JTextField();
         lblUsuario = new javax.swing.JLabel();
         lblContrasinal = new javax.swing.JLabel();
-        contrasinal = new javax.swing.JTextField();
         bConfirmarInicioSesion = new javax.swing.JButton();
         lblUsuarioNonEncontrado = new javax.swing.JLabel();
         tituloInicioSesion = new javax.swing.JLabel();
+        contrasinal = new javax.swing.JPasswordField();
         panelRegistrarse = new javax.swing.JPanel();
         usuarioNovo = new javax.swing.JTextField();
         lblUsuarioNovo = new javax.swing.JLabel();
         lblContrasinalNovo = new javax.swing.JLabel();
-        contrasinalNovo = new javax.swing.JTextField();
         bConfirmarRegistrarse = new javax.swing.JButton();
         tituloRegistrarse = new javax.swing.JLabel();
         lblUsuarioOcupado = new javax.swing.JLabel();
+        contrasinalNovo = new javax.swing.JPasswordField();
         pantallaInicial = new javax.swing.JPanel();
         tituloSerpe = new javax.swing.JLabel();
         bIniciar = new javax.swing.JButton();
@@ -189,9 +188,7 @@ public class Interface extends javax.swing.JFrame {
         jDGardarPuntuacion.setLocation(350, 100);
         jDGardarPuntuacion.setTitle("Gardar Puntuación");
         jDGardarPuntuacion.setIconImage(null);
-        jDGardarPuntuacion.setMaximumSize(new java.awt.Dimension(700, 700));
         jDGardarPuntuacion.setMinimumSize(new java.awt.Dimension(700, 700));
-        jDGardarPuntuacion.setPreferredSize(new java.awt.Dimension(700, 700));
         jDGardarPuntuacion.setResizable(false);
 
         panelGardarPuntuacion.setBackground(new java.awt.Color(182, 255, 182));
@@ -291,9 +288,7 @@ public class Interface extends javax.swing.JFrame {
         jDSesion.setLocation(100, 100);
         jDSesion.setTitle("Sesión");
         jDSesion.setIconImage(null);
-        jDSesion.setMaximumSize(new java.awt.Dimension(500, 500));
         jDSesion.setMinimumSize(new java.awt.Dimension(500, 500));
-        jDSesion.setPreferredSize(new java.awt.Dimension(500, 500));
         jDSesion.setResizable(false);
 
         panelInicioSesion.setVisible(false);
@@ -311,8 +306,6 @@ public class Interface extends javax.swing.JFrame {
         lblContrasinal.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
         lblContrasinal.setForeground(new java.awt.Color(102, 0, 102));
         lblContrasinal.setText("Inserte o seu contrasinal:");
-
-        contrasinal.setBackground(new java.awt.Color(102, 204, 255));
 
         bConfirmarInicioSesion.setBackground(new java.awt.Color(102, 204, 255));
         bConfirmarInicioSesion.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
@@ -336,6 +329,8 @@ public class Interface extends javax.swing.JFrame {
         tituloInicioSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloInicioSesion.setText("Inicio de Sesión");
 
+        contrasinal.setBackground(new java.awt.Color(102, 204, 255));
+
         javax.swing.GroupLayout panelInicioSesionLayout = new javax.swing.GroupLayout(panelInicioSesion);
         panelInicioSesion.setLayout(panelInicioSesionLayout);
         panelInicioSesionLayout.setHorizontalGroup(
@@ -346,13 +341,14 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelInicioSesionLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addGroup(panelInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblUsuarioNonEncontrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contrasinal)
-                    .addComponent(lblContrasinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(usuario)
-                    .addComponent(lblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bConfirmarInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(contrasinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblUsuarioNonEncontrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblContrasinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(usuario)
+                        .addComponent(lblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bConfirmarInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(234, Short.MAX_VALUE))
         );
 
@@ -370,7 +366,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(lblContrasinal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contrasinal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contrasinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(bConfirmarInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -395,8 +391,6 @@ public class Interface extends javax.swing.JFrame {
         lblContrasinalNovo.setForeground(new java.awt.Color(102, 0, 102));
         lblContrasinalNovo.setText("Inserte un contrasinal:");
 
-        contrasinalNovo.setBackground(new java.awt.Color(102, 204, 255));
-
         bConfirmarRegistrarse.setBackground(new java.awt.Color(102, 204, 255));
         bConfirmarRegistrarse.setFont(new java.awt.Font("Reem Kufi", 0, 14)); // NOI18N
         bConfirmarRegistrarse.setForeground(new java.awt.Color(102, 0, 102));
@@ -419,6 +413,8 @@ public class Interface extends javax.swing.JFrame {
         lblUsuarioOcupado.setFont(new java.awt.Font("Reem Kufi", 0, 18)); // NOI18N
         lblUsuarioOcupado.setForeground(new java.awt.Color(102, 0, 102));
 
+        contrasinalNovo.setBackground(new java.awt.Color(102, 204, 255));
+
         javax.swing.GroupLayout panelRegistrarseLayout = new javax.swing.GroupLayout(panelRegistrarse);
         panelRegistrarse.setLayout(panelRegistrarseLayout);
         panelRegistrarseLayout.setHorizontalGroup(
@@ -426,18 +422,21 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(panelRegistrarseLayout.createSequentialGroup()
                 .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(tituloRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelRegistrarseLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contrasinalNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblContrasinalNovo)
-                            .addComponent(usuarioNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUsuarioNovo)
-                            .addComponent(bConfirmarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUsuarioOcupado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelRegistrarseLayout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(tituloRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
-                .addGap(168, 168, 168))
+                            .addComponent(lblUsuarioOcupado, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                            .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                                .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(contrasinalNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblContrasinalNovo)
+                                    .addComponent(usuarioNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblUsuarioNovo)
+                                    .addComponent(bConfirmarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(120, 120, 120))
         );
 
         panelRegistrarseLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {contrasinalNovo, lblContrasinalNovo, lblUsuarioNovo, usuarioNovo});
@@ -454,7 +453,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(lblContrasinalNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contrasinalNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contrasinalNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(bConfirmarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -984,8 +983,6 @@ public class Interface extends javax.swing.JFrame {
             }
             if (evt.getKeyChar()=='a' || evt.getKeyChar()=='A' || evt.getKeyCode()==37){
                 xogo.voltearSerpeEsquerda();
-            }if (evt.getKeyChar()==' '){
-                xogo.avanzarSerpe();
             }
             
             if (evt.getKeyCode()==KeyEvent.VK_ESCAPE){
@@ -1188,18 +1185,14 @@ public class Interface extends javax.swing.JFrame {
     }
     
     private void reiniciar(){
-        xogo.borrarCadrados();
         bPausa.setVisible(true);
         panelFinXogo.setVisible(false);
-        xogo.setPuntuacion(0);
-        xogo.setFroitasComidas(0);
-        xogo.setBombasComidas(0);
-        xogo.setTempo(0);
         establecerPuntos(0);
         engadirFroitas(0);
         engadirBombas(0);
         engadirTempo(0);
-        delay=500;
+        modificarTimerVelocidade(500);
+        xogo.restaurarXogo();
     }
     
     /**
@@ -1234,13 +1227,17 @@ public class Interface extends javax.swing.JFrame {
     }
     
     private void crearTimerVelocidade(){
-        timer=new Timer(delay, new ActionListener() {
+        timer=new Timer(xogo.getVelocidade(), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 xogo.avanzarSerpe();
                 panelXogo.requestFocus();
             }
         });
+    }
+    
+    public void modificarTimerVelocidade(int velocidade){
+        timer.setDelay(velocidade);
     }
     
     public void engadirFroitas(int froitas){
@@ -1292,8 +1289,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton bSairXogo;
     private javax.swing.JButton bVolverInicio;
     private javax.swing.JLabel bombasComidas;
-    private javax.swing.JTextField contrasinal;
-    private javax.swing.JTextField contrasinalNovo;
+    private javax.swing.JPasswordField contrasinal;
+    private javax.swing.JPasswordField contrasinalNovo;
     private javax.swing.JLabel froitasComidas;
     private javax.swing.JLabel imagen;
     private javax.swing.JDialog jDGardarPuntuacion;

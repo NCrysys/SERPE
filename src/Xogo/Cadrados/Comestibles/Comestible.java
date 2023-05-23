@@ -27,7 +27,7 @@ public abstract class Comestible extends Cadrado{
         do{
             setCoordX((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0) * TAMANO));
             setCoordY((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0) * TAMANO)); 
-        }while(!xogo.comprobarPosicionValida(getCoordX(), getCoordY()));
+        }while(!xogo.comprobarPosicionValida(getCoordX(), getCoordY()) || !xogo.comprobarPosicionComestibles(getCoordX(), getCoordY()));
     }
     
     public abstract void efecto();

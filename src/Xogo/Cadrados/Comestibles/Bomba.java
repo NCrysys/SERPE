@@ -29,10 +29,15 @@ public class Bomba extends Comestible{
     @Override
     public void efecto(){
         for (int i = 0; i < xogo.getBombasComidas(); i++) {
-            xogo.setPuntuacion(xogo.getPuntuacion()-15);
+            xogo.setPuntuacion(xogo.getPuntuacion()-30);
         }
-        for (int i = 0; i < xogo.getBombasComidas()*3 && xogo.getSerpe().getCorpo().size()>1; i++) {
+        for (int i = 0; i < xogo.getBombasComidas()*3 && xogo.getSerpe().getLonxitudeSerpe()>1; i++) {
             xogo.getSerpe().reducirLonxitude();
         }
+    }
+    
+    public void desaparecer(){
+        setCoordX(-getTAMANO());
+        setCoordY(-getTAMANO());
     }
 }

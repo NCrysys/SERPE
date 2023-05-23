@@ -28,6 +28,7 @@ public class Maza extends Comestible{
     
     @Override
     public void efecto(){
-        
+        xogo.setPuntuacion(xogo.getPuntuacion()+10);
+        xogo.aumentarLonxitudeSerpe();
     }
 }

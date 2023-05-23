@@ -156,9 +156,6 @@ public class Serpe {
         xogo.getInterfaz().borrarCadrado(corpo.get(corpo.size()-1));
         corpo.remove(corpo.size()-1);
         lonxitudeSerpe--;
-        if(lonxitudeSerpe<=1){
-            xogo.getInterfaz().finDoXogo();
-        }
     }
     
     public void borrarSerpe(){

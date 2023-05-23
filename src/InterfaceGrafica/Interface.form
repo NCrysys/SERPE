@@ -152,13 +152,7 @@
         <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="null"/>
         </Property>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[700, 700]"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[700, 700]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[700, 700]"/>
         </Property>
         <Property name="resizable" type="boolean" value="false"/>
@@ -338,13 +332,7 @@
         <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="null"/>
         </Property>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[500, 500]"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[500, 500]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[500, 500]"/>
         </Property>
         <Property name="resizable" type="boolean" value="false"/>
@@ -423,13 +411,15 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblUsuarioNonEncontrado" max="32767" attributes="0"/>
-                          <Component id="contrasinal" linkSize="11" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblContrasinal" linkSize="11" alignment="0" max="32767" attributes="0"/>
-                          <Component id="usuario" linkSize="11" max="32767" attributes="0"/>
-                          <Component id="lblUsuario" linkSize="11" max="32767" attributes="0"/>
-                          <Component id="bConfirmarInicioSesion" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="contrasinal" linkSize="11" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblUsuarioNonEncontrado" max="32767" attributes="0"/>
+                              <Component id="lblContrasinal" linkSize="11" alignment="0" max="32767" attributes="0"/>
+                              <Component id="usuario" linkSize="11" max="32767" attributes="0"/>
+                              <Component id="lblUsuario" linkSize="11" max="32767" attributes="0"/>
+                              <Component id="bConfirmarInicioSesion" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="234" max="32767" attributes="0"/>
                   </Group>
@@ -447,7 +437,7 @@
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="lblContrasinal" linkSize="12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="contrasinal" linkSize="12" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="contrasinal" linkSize="12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="bConfirmarInicioSesion" min="-2" pref="28" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -485,13 +475,6 @@
                   <Color blue="66" green="0" red="66" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Inserte o seu contrasinal:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="contrasinal">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="cc" red="66" type="rgb"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="bConfirmarInicioSesion">
@@ -545,6 +528,13 @@
                 <Property name="text" type="java.lang.String" value="Inicio de Sesi&#xf3;n"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JPasswordField" name="contrasinal">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="cc" red="66" type="rgb"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelRegistrarse">
@@ -568,23 +558,28 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="contrasinalNovo" linkSize="15" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
-                                  <Component id="lblContrasinalNovo" linkSize="15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="usuarioNovo" linkSize="15" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
-                                  <Component id="lblUsuarioNovo" linkSize="15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="bConfirmarRegistrarse" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="lblUsuarioOcupado" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
-                              <Component id="tituloRegistrarse" pref="190" max="32767" attributes="0"/>
+                              <Component id="tituloRegistrarse" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblUsuarioOcupado" alignment="0" pref="305" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="contrasinalNovo" linkSize="15" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblContrasinalNovo" linkSize="15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="usuarioNovo" linkSize="15" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
+                                          <Component id="lblUsuarioNovo" linkSize="15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="bConfirmarRegistrarse" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -600,7 +595,7 @@
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="lblContrasinalNovo" linkSize="16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="contrasinalNovo" linkSize="16" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="contrasinalNovo" linkSize="16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="bConfirmarRegistrarse" min="-2" pref="28" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -638,13 +633,6 @@
                   <Color blue="66" green="0" red="66" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Inserte un contrasinal:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="contrasinalNovo">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="cc" red="66" type="rgb"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="bConfirmarRegistrarse">
@@ -695,6 +683,13 @@
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="0" red="66" type="rgb"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="contrasinalNovo">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="cc" red="66" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
