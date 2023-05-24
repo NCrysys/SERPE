@@ -123,12 +123,20 @@ public class Xogo {
     
     
     //MÉTODOS
+    /**
+     * Inicia esta partida chamado a formarSerpe e xerarFroita
+     * @see Xogo.Serpe#formarSerpe()
+     */
     public void iniciarPartida(){
         serpe.formarSerpe();
         xerarFroita();
         bomba.desaparecer();
     }
     
+    /**
+     * Comproba se pode cambiar a dirección de movemento cara arriba, se pode chama a voltearArriba en Serpe
+     * @see Xogo.Serpe#voltearArriba()
+     */
     public void voltearSerpeArriba(){
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordY()==0 && !comprobarPosicionSerpe(cabeza.getCoordX(), MAXY-cabeza.getTAMANO())){
@@ -138,6 +146,10 @@ public class Xogo {
         }
     }
     
+    /**
+     * Comproba se pode cambiar a dirección de movemento cara a dereita, se pode chama a voltearDereita en Serpe
+     * @see Xogo.Serpe#voltearDereita()
+     */
     public void voltearSerpeDereita(){
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordX()==MAXX-cabeza.getTAMANO() && !comprobarPosicionSerpe(0, cabeza.getCoordY())){
@@ -147,6 +159,10 @@ public class Xogo {
         }
     }
     
+    /**
+     * Comproba se pode cambiar a dirección de movemento cara abaixo, se pode chama a voltearAbaixo en Serpe
+     * @see Xogo.Serpe#voltearAbaixo()
+     */
     public void voltearSerpeAbaixo(){
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordY()==MAXY-cabeza.getTAMANO() && !comprobarPosicionSerpe(cabeza.getCoordX(), 0)){
@@ -156,6 +172,10 @@ public class Xogo {
         }
     }
     
+    /**
+     * Comproba se pode cambiar a dirección de movemento cara a esquerda, se pode chama a voltearEsquerda en Serpe
+     * @see Xogo.Serpe#voltearEsquerda()
+     */
     public void voltearSerpeEsquerda(){
         Cadrado cabeza = serpe.getCorpo().get(0);
         if (cabeza.getCoordX()==0 && !comprobarPosicionSerpe(MAXX-cabeza.getTAMANO(), cabeza.getCoordY())){
@@ -171,6 +191,14 @@ public class Xogo {
         }
     }
     
+    /**
+     * Comproba se esta Serpe pode avanzar chamando a comprobarPosicionValida. 
+     * Se pode avanzar chama a avanzar en Serpe ou no seu caso a teletransportar, senón chamará a finDoXogo.
+     * @see Xogo.Xogo#comprobarPosicionValida(int x, int y)
+     * @see Xogo.Serpe#avanzar()
+     * @see Xogo.Serpe#teletransportar(int x, int y)
+     * @see InterfaceGrafica.Interface#finDoXogo()
+     */
     public void avanzarSerpe(){
         Cadrado cabeza = serpe.getCorpo().get(0);
         int xCabeza = cabeza.getCoordX();
@@ -193,7 +221,8 @@ public class Xogo {
             pintarSerpe();
         }
         else if (!modoClasico && !comprobarBordes(xCabeza, yCabeza) && comprobarTeletransporte()){
-            teletransporte(xCabeza, yCabeza);
+            cabeza = serpe.teletransportar(xCabeza, yCabeza);
+            comer(cabeza.getCoordX(), cabeza.getCoordY());
         }
         else{
             interfaz.finDoXogo();
@@ -219,25 +248,12 @@ public class Xogo {
         return comprobarPosicionSerpe(xCabeza, yCabeza);
     }
     
-    private void teletransporte(int xCabeza, int yCabeza){
-        Cadrado cabeza = serpe.getCorpo().get(0);
-        serpe.avanzar();
-        if (xCabeza<0){
-            cabeza.setCoordX(MAXX-cabeza.getTAMANO());
-        }
-        else if (xCabeza>=MAXX){
-            cabeza.setCoordX(0);
-        }
-        else if (yCabeza<0){
-            cabeza.setCoordY(MAXY-cabeza.getTAMANO());
-        }
-        else {
-            cabeza.setCoordY(0);
-        }
-        serpe.avanzarCabeza();
-        comer(cabeza.getCoordX(), cabeza.getCoordY());
-    }
-    
+    /**
+     * Comproba se a posición destas coordenadas pasadas é valida
+     * @param x coordenada x
+     * @param y coordenada y
+     * @return true se a posicion é valida, false se a posición non é valida
+     */
     public boolean comprobarPosicionValida(int x, int y){
         boolean posicionValida=true;
         if (!comprobarPosicionSerpe(x, y) || !comprobarBordes(x, y)){
@@ -274,7 +290,11 @@ public class Xogo {
         return posicionValida;
     }
     
-    public boolean comprobarPosicionComestibles(int x, int y){
+    /**
+     * Comproba se a posicion dos comestibles coinciden.
+     * @return true se non coinciden, false se coinciden
+     */
+    public boolean comprobarPosicionComestibles(){
         boolean posicionValida=true;
         if (froita.getCoordX()==bomba.getCoordX() && froita.getCoordY()==bomba.getCoordY()){
             posicionValida=false;
@@ -282,7 +302,7 @@ public class Xogo {
         return posicionValida;
     }
     
-    public void xerarComestibles(){
+    private void xerarComestibles(){
         froitas=new HashMap();
         Comestible maza = new Maza(this);
         Comestible pemento = new Pemento(this);
@@ -298,16 +318,16 @@ public class Xogo {
         bomba = new Bomba(this);
     }
     
-    /**
-     * Establecese aleatoriamente un Comestible para o campo froita.
-     */
-    public void xerarFroita(){
+    private void xerarFroita(){
         int comida = (int) Math.floor(Math.random() * (8 - 1 + 1) + 1);
         froita = froitas.get(comida);
         froita.establecerPosicion();
         interfaz.pintarCadrado(froita);
     }
     
+    /**
+     * Establece unha nova posición para esta bomba.
+     */
     public void xerarBomba(){
         bomba.establecerPosicion();
         interfaz.pintarCadrado(bomba);
@@ -343,10 +363,18 @@ public class Xogo {
         }
     }
     
+    /**
+     * Chama a aumentarLonxitude en Serpe.
+     * @see Xogo.Serpe#aumentarLonxitude()
+     */
     public void aumentarLonxitudeSerpe(){
         serpe.aumentarLonxitude();
     }
     
+    /**
+     * Modifica a velocidade da serpe
+     * @param veloz cantidade na que se aumenta a velocidade
+     */
     public void modificarVelocidadeSerpe(int veloz){
         velocidade-=veloz;
         if(velocidade<150){
@@ -358,6 +386,9 @@ public class Xogo {
         interfaz.modificarTimerVelocidade(velocidade);
     }
     
+    /**
+     * Restaura os valores por defecto do xogo e borra os cadrados do xogo.
+     */
     public void restaurarXogo(){
         setPuntuacion(0);
         setFroitasComidas(0);
@@ -367,7 +398,7 @@ public class Xogo {
         borrarCadrados();
     }
     
-    public void borrarCadrados(){
+    private void borrarCadrados(){
         serpe.setIterCorpo(serpe.getCorpo().iterator());
         while (serpe.getIterCorpo().hasNext()){
             interfaz.borrarCadrado(serpe.getIterCorpo().next());

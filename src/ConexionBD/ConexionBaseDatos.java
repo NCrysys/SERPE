@@ -31,7 +31,7 @@ public class ConexionBaseDatos {
         abrirConexion();
     }
     
-    //CONSTRUCTOR
+    //MÉTODOS
     private void abrirConexion(){
         String url = "jdbc:mysql://localhost/BDSERPE";
         String uid = "root";
@@ -44,6 +44,15 @@ public class ConexionBaseDatos {
         }
     }
     
+    /**
+     * Garda os datos da partida na base de datos
+     * @param usuario nome do usuario que xogou esta partida
+     * @param puntos puntos conseguidos nesta partida
+     * @param froitas número de froitas comidas nesta partida
+     * @param bombas número de bombas comidas nesta partida
+     * @param tempo tempo de xogo desta partida
+     * @return true se estes datos se gardaron con éxito, false se estes datos non se puideron gardar
+     */
     public boolean gardarDatos(String usuario, int puntos, int froitas, int bombas, int tempo){
         boolean gardado=false;
         try {
@@ -59,6 +68,7 @@ public class ConexionBaseDatos {
         return gardado;
     }
     
+    
     private int obterIdJugador(String usuario) throws SQLException{
         Statement selectIdJugador = con.createStatement();
         ResultSet resultIdJugador = selectIdJugador.executeQuery("SELECT ID_JUGADOR FROM JUGADORES WHERE USUARIO='"+usuario+"'");
@@ -67,6 +77,11 @@ public class ConexionBaseDatos {
         return idJugador;
     }
     
+    /**
+     * Comproba se este usuario está rexistrado na base de datos
+     * @param usuario nome deste usuario
+     * @return true se este usuario está na base de datos, false se non se encontra este usuario na base de datos
+     */
     public boolean comprobarUsuario(String usuario){
         boolean registrado=false;
         try{
@@ -85,6 +100,13 @@ public class ConexionBaseDatos {
         return registrado;
     }
     
+    /**
+     * Comproba se na base de datos está rexistrado este usuario con este contrasinal
+     * @param usuario nome deste usuario
+     * @param contrasinal contrasinal deste usuario
+     * @return true se este usuario está na base de datos con este contrasinal, 
+     *          false se non se encontra este usuario con este contrasinal na base de datos
+     */
     public boolean iniciarSesion(String usuario, String contrasinal){
         boolean registrado=false;
         try{
@@ -112,6 +134,12 @@ public class ConexionBaseDatos {
         return contrasinalCif;
     }
     
+    /**
+     * Rexistra este usuario con este contrasinal na base de datos
+     * @param usuario nome deste usuario
+     * @param contrasinal contrasinal deste usuario
+     * @return true se este usuario se rexistrou con éxito, false se este usuario non se puido rexistrar
+     */
     public boolean registrarse(String usuario, String contrasinal){
         boolean registrado=false;
         if (comprobarUsuario(usuario)){
@@ -130,6 +158,10 @@ public class ConexionBaseDatos {
         return registrado;
     }
     
+    /**
+     * Obten todas as partidas gardadas na base de datos e as almacena nun ArrayList de partidas
+     * @return un ArrayList con todas as partidas obtidas
+     */
     public ArrayList obterPuntuacións(){
         partidas.removeAll(partidas);
         try {

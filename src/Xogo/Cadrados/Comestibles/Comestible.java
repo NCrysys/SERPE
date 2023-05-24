@@ -27,7 +27,7 @@ public abstract class Comestible extends Cadrado implements Imaginable{
         do{
             setCoordX((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0) * TAMANO));
             setCoordY((int) (Math.floor(Math.random() * (xogo.getMAXX()/TAMANO-1 - 0 + 1) + 0) * TAMANO)); 
-        }while(!xogo.comprobarPosicionValida(getCoordX(), getCoordY()) || !xogo.comprobarPosicionComestibles(getCoordX(), getCoordY()));
+        }while(!xogo.comprobarPosicionValida(getCoordX(), getCoordY()) || !xogo.comprobarPosicionComestibles());
     }
     
     public abstract void efecto();

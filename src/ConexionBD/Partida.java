@@ -19,6 +19,7 @@ public class Partida {
     private int tempo;
     private Date fecha;
     private Object[] partida;
+    
     //CONSTRUCTOR
     public Partida(String jugador, int puntuacion, int froitas, int bombas, int tempo, Date fecha) {
         this.jugador=jugador;

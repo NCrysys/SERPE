@@ -4,6 +4,7 @@
  */
 package Xogo;
 
+import Xogo.Cadrados.Cadrado;
 import Xogo.Cadrados.CadradoCorpo;
 import Xogo.Xogo;
 import static java.awt.Color.CYAN;
@@ -63,6 +64,9 @@ public class Serpe {
     
     
     //MÉTODOS
+    /**
+     * Crea esta Serpe con 3 cadrados de corpo mais a Cabeza
+     */
     public void formarSerpe(){
         cabeza = new CadradoCorpo(this);
         xogo.getInterfaz().pintarCadrado(cabeza);
@@ -93,28 +97,44 @@ public class Serpe {
         }
     }
     
+    /**
+     * Cambia o movemento desta serpe cara arriba
+     * @return direccion de movemento da serpe
+     */
     public int voltearArriba(){
         voltear=1;
         return voltear;
     }
     
+    /**
+     * Cambia o movemento desta serpe cara a dereita
+     * @return direccion de movemento da serpe
+     */
     public int voltearDereita(){
         voltear=2;
         return voltear;
     }
     
+    /**
+     * Cambia o movemento desta serpe cara abaixo
+     * @return direccion de movemento da serpe
+     */
     public int voltearAbaixo(){
         voltear=3;
         return voltear;
     }
     
+    /**
+     * Cambia o movemento desta serpe cara a esquerda
+     * @return direccion de movemento da serpe
+     */
     public int voltearEsquerda(){
         voltear=4;
         return voltear;
     }
     
     /**
-     * Fai que a serpe avance na dirección na que mira.
+     * Fai que esta serpe avance na dirección na que mira.
      */
     public void avanzar(){
         for (int i = corpo.size()-1; i >= 0; i--) {
@@ -139,11 +159,39 @@ public class Serpe {
         avanzarCabeza();
     }
     
-    public void avanzarCabeza(){
+    private void avanzarCabeza(){
         cabeza.setCoordX(corpo.get(0).getCoordX()-5);
         cabeza.setCoordY(corpo.get(0).getCoordY()-5);
     }
     
+    /**
+     * Teletransporta a Serpe ao lado contrario do taboleiro según a posición do primeiro cadrado do corpo.
+     * @param x coordenada x do primeiro cadrado do corpo
+     * @param y coordenada y do primeiro cadrado do corpo
+     * @return O primeiro cadrado do corpo coa posición xa cambiada
+     */
+    public Cadrado teletransportar(int x, int y){
+        Cadrado cabeza = corpo.get(0);
+        avanzar();
+        if (x<0){
+            cabeza.setCoordX(xogo.getMAXX()-cabeza.getTAMANO());
+        }
+        else if (x>=xogo.getMAXX()){
+            cabeza.setCoordX(0);
+        }
+        else if (y<0){
+            cabeza.setCoordY(xogo.getMAXY()-cabeza.getTAMANO());
+        }
+        else {
+            cabeza.setCoordY(0);
+        }
+        avanzarCabeza();
+        return cabeza;
+    }
+    
+    /**
+     * Aumenta a lonxitude desta Serpe engadindolle un novo cadrado de corpo
+     */
     public void aumentarLonxitude(){
         CadradoCorpo cCorpo = new CadradoCorpo(this);
         cCorpo.cor();
@@ -152,12 +200,18 @@ public class Serpe {
         lonxitudeSerpe++;
     }
     
+    /**
+     * Reduce a lonxitude desta Serpe borrandolle o último cadrado do corpo
+     */
     public void reducirLonxitude(){
         xogo.getInterfaz().borrarCadrado(corpo.get(corpo.size()-1));
         corpo.remove(corpo.size()-1);
         lonxitudeSerpe--;
     }
     
+    /**
+     * Elimina a Serpe borrando todos os cadrados do seu corpo e restablece a dirección de movemento
+     */
     public void borrarSerpe(){
         corpo.removeAll(corpo);
         lonxitudeSerpe=0;
