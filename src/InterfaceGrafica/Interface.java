@@ -1052,7 +1052,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_bRegistrarseActionPerformed
 
     private void bConfirmarGardarPuntuacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarGardarPuntuacionActionPerformed
-        boolean gardado=conexionBD.gardarDatos(xogo.getJugador(), xogo.getPuntuacion(), xogo.getFroitasComidas(), xogo.getBombasComidas(), xogo.getTempo());
+        boolean gardado=conexionBD.gardarDatos(xogo.getJugador(), xogo.getPuntuacion(), xogo.getFroitasComidas(), xogo.getBombasComidas(), xogo.getTempo(), xogo.isModoClasico());
         if (gardado){
             jDGardarPuntuacion.setVisible(false);
             bGardarPuntuacion.setEnabled(false);
