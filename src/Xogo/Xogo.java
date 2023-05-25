@@ -29,7 +29,6 @@ public class Xogo {
     private String jugador = "invitado";
     private int puntuacion=0;
     private int tempo=0;
-    private int velocidade = 500;
     private int froitasComidas=0;
     private int bombasComidas=0;
     private boolean modoClasico=true;
@@ -95,12 +94,6 @@ public class Xogo {
     }
     public void setTempo(int tempo) {
         this.tempo = tempo;
-    }
-    public int getVelocidade() {
-        return velocidade;
-    }
-    public void setVelocidade(int velocidade) {
-        this.velocidade = velocidade;
     }
     public int getFroitasComidas() {
         return froitasComidas;
@@ -216,8 +209,8 @@ public class Xogo {
             xCabeza = cabeza.getCoordX()-cabeza.getTAMANO();
         }
         if(comprobarPosicionValida(xCabeza, yCabeza)){
-            comer(xCabeza, yCabeza);
             serpe.avanzar();
+            comer(xCabeza, yCabeza);
             pintarSerpe();
         }
         else if (!modoClasico && !comprobarBordes(xCabeza, yCabeza) && comprobarTeletransporte()){
@@ -311,15 +304,16 @@ public class Xogo {
         froitas.put(2, maza);
         froitas.put(3, maza);
         froitas.put(4, maza);
-        froitas.put(5, pemento);
+        froitas.put(5, maza);
         froitas.put(6, pemento);
         froitas.put(7, pemento);
-        froitas.put(8, sandia);
+        froitas.put(8, pemento);
+        froitas.put(9, sandia);
         bomba = new Bomba(this);
     }
     
     private void xerarFroita(){
-        int comida = (int) Math.floor(Math.random() * (8 - 1 + 1) + 1);
+        int comida = (int) Math.floor(Math.random() * (9 - 1 + 1) + 1);
         froita = froitas.get(comida);
         froita.establecerPosicion();
         interfaz.pintarCadrado(froita);
@@ -376,6 +370,7 @@ public class Xogo {
      * @param veloz cantidade na que se aumenta a velocidade
      */
     public void modificarVelocidadeSerpe(int veloz){
+        int velocidade=serpe.getVelocidade();
         velocidade-=veloz;
         if(velocidade<150){
             velocidade=150;
@@ -383,6 +378,7 @@ public class Xogo {
         else if(velocidade>500){
             velocidade=500;
         }
+        serpe.setVelocidade(velocidade);
         interfaz.modificarTimerVelocidade(velocidade);
     }
     
@@ -394,7 +390,7 @@ public class Xogo {
         setFroitasComidas(0);
         setBombasComidas(0);
         setTempo(0);
-        setVelocidade(500);
+        serpe.setVelocidade(500);
         borrarCadrados();
     }
     

@@ -23,7 +23,8 @@ public class Serpe {
     private ArrayList<CadradoCorpo> corpo = new ArrayList<>();
     private Iterator<CadradoCorpo> iterCorpo;
     private CadradoCorpo cabeza;
-    private int voltear=2;;
+    private int voltear=2;
+    private int velocidade = 500;
     
     //CONSTRUCTOR
     public Serpe(Xogo xogo) {
@@ -61,7 +62,12 @@ public class Serpe {
     public void setVoltear(int voltear) {
         this.voltear = voltear;
     }
-    
+    public int getVelocidade() {
+        return velocidade;
+    }
+    public void setVelocidade(int velocidade) {
+        this.velocidade = velocidade;
+    }
     
     //MÉTODOS
     /**

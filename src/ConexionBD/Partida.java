@@ -18,16 +18,18 @@ public class Partida {
     private int bombas;
     private int tempo;
     private Date fecha;
+    private String modo;
     private Object[] partida;
     
     //CONSTRUCTOR
-    public Partida(String jugador, int puntuacion, int froitas, int bombas, int tempo, Date fecha) {
+    public Partida(String jugador, int puntuacion, int froitas, int bombas, int tempo, Date fecha, String modo) {
         this.jugador=jugador;
         this.puntuacion=puntuacion;
         this.froitas=froitas;
         this.bombas=bombas;
         this.tempo=tempo;
         this.fecha=fecha;
+        this.modo=modo;
         formarPartida();
     }
     
@@ -74,15 +76,22 @@ public class Partida {
     public void setPartida(Object[] partida) {
         this.partida = partida;
     }
+    public String getModo() {
+        return modo;
+    }
+    public void setModo(String modo) {
+        this.modo = modo;
+    }
     
     //MÉTODOS
     private void formarPartida(){
-        partida = new Object[6];
+        partida = new Object[7];
         partida[0] = jugador;
         partida[1] = puntuacion;
         partida[2] = froitas;
         partida[3] = bombas;
         partida[4] = tempo;
         partida[5] = fecha;
+        partida[6] = modo;
     }
 }

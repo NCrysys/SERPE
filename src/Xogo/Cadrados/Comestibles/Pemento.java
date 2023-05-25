@@ -15,18 +15,16 @@ import javax.swing.JOptionPane;
  * @author a22noellr
  */
 public class Pemento extends Comestible{
-    
+    //CONSTRUCTOR
     public Pemento(Xogo xogo) {
         super(xogo);
     }
     
-    @Override
-    public void cor() {
-        lblCadrado.setBackground(ORANGE);
-        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
-        lblCadrado.setOpaque(true);
-    }
-
+    //MÉTODOS
+    /**
+     * Establece a imaxe para este Pemento, se non pode chama a cor.
+     * @see Xogo.Cadrados.Comestibles.Pemento#cor()
+     */
     @Override
     public void imaxe() {
         try{
@@ -37,6 +35,19 @@ public class Pemento extends Comestible{
         }
     }
     
+    /**
+     * Establece a cor deste Pemento a naranxa e o borde a negro.
+     */
+    @Override
+    public void cor() {
+        lblCadrado.setBackground(ORANGE);
+        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
+        lblCadrado.setOpaque(true);
+    }
+    
+    /**
+     * Aumenta a puntuación deste Xogo en 20 e aumenta a súa velocidade en 50.
+     */
     @Override
     public void efecto() {
         xogo.setPuntuacion(xogo.getPuntuacion()+20);

@@ -15,18 +15,16 @@ import javax.swing.JOptionPane;
  * @author a22noellr
  */
 public class Maza extends Comestible{
-    
+    //CONSTRUCTOR
     public Maza(Xogo xogo) {
         super(xogo);
     }
     
-    @Override
-    public void cor() {
-        lblCadrado.setBackground(RED);
-        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
-        lblCadrado.setOpaque(true);
-    }
-
+    //MÉTODOS
+    /**
+     * Establece a imaxe para esta Maza, se non pode chama a cor.
+     * @see Xogo.Cadrados.Comestibles.Maza#cor()
+     */
     @Override
     public void imaxe() {
         try{
@@ -37,6 +35,19 @@ public class Maza extends Comestible{
         }
     }
     
+    /**
+     * Establece a cor desta Maza a vermello e o borde a negro.
+     */
+    @Override
+    public void cor() {
+        lblCadrado.setBackground(RED);
+        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
+        lblCadrado.setOpaque(true);
+    }
+    
+    /**
+     * Aumenta a lonxitude desta Serpe en 1 e aumenta a puntuación deste Xogo en 10.
+     */
     @Override
     public void efecto(){
         xogo.setPuntuacion(xogo.getPuntuacion()+10);

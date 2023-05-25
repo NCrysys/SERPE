@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 public class CadradoCorpo extends Cadrado{
     //ATRIBUTOS
     private Serpe serpe;
+    
     //CONSTRUCTOR
     public CadradoCorpo(Serpe serpe) {
         this.serpe=serpe;

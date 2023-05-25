@@ -15,18 +15,16 @@ import javax.swing.JOptionPane;
  * @author a22noellr
  */
 public class Sandia extends Comestible{
-    
+    //CONSTRUCTOR
     public Sandia(Xogo xogo) {
         super(xogo);
     }
     
-    @Override
-    public void cor() {
-        lblCadrado.setBackground(GREEN);
-        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
-        lblCadrado.setOpaque(true);
-    }
-
+    //MÉTODOS
+    /**
+     * Establece a imaxe para esta Sandia, se non pode chama a cor.
+     * @see Xogo.Cadrados.Comestibles.Sandia#cor()
+     */
     @Override
     public void imaxe() {
         try{
@@ -37,11 +35,24 @@ public class Sandia extends Comestible{
         }
     }
     
+    /**
+     * Establece a cor desta Sandia a verde e o borde a negro.
+     */
+    @Override
+    public void cor() {
+        lblCadrado.setBackground(GREEN);
+        lblCadrado.setBorder(BorderFactory.createLineBorder(BLACK));
+        lblCadrado.setOpaque(true);
+    }
+    
+    /**
+     * Aumenta a lonxitude desta Serpe en 2, aumenta a puntuación deste Xogo en 40 e disminúe a súa velocidade en 100.
+     */
     @Override
     public void efecto() {
+        xogo.aumentarLonxitudeSerpe();
+        xogo.aumentarLonxitudeSerpe();
         xogo.setPuntuacion(xogo.getPuntuacion()+40);
         xogo.modificarVelocidadeSerpe(-100);
-        xogo.aumentarLonxitudeSerpe();
-        xogo.aumentarLonxitudeSerpe();
     }
 }

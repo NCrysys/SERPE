@@ -1,7 +1,6 @@
 package InterfaceGrafica;
 
 import ConexionBD.ConexionBaseDatos;
-import ConexionBD.Partida;
 import Xogo.Cadrados.Cadrado;
 import Xogo.Xogo;
 import java.awt.Image;
@@ -25,10 +24,13 @@ import javax.swing.table.DefaultTableModel;
  * @author a22noellr
  */
 public class Interface extends javax.swing.JFrame {
+    //ATRIBUTOS
     private Xogo xogo;
     private ConexionBaseDatos conexionBD;
-    private Timer timer;
+    private Timer timerVelocidade;
     private Timer tempoXogo;
+    
+    //CONSTRUCTOR
     /**
      * Creates new form Interface
      */
@@ -39,7 +41,8 @@ public class Interface extends javax.swing.JFrame {
         crearTimerVelocidade();
         crearTempoXogo();
     }
-
+    
+    //MÉTODOS
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,7 +83,7 @@ public class Interface extends javax.swing.JFrame {
         tituloSerpe = new javax.swing.JLabel();
         bIniciar = new javax.swing.JButton();
         bModoXogo = new javax.swing.JButton();
-        bPuntuacions = new javax.swing.JButton();
+        bVerPuntuacions = new javax.swing.JButton();
         bSairXogo = new javax.swing.JButton();
         juego = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
@@ -537,13 +540,13 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        bPuntuacions.setBackground(new java.awt.Color(102, 204, 255));
-        bPuntuacions.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
-        bPuntuacions.setForeground(new java.awt.Color(102, 0, 102));
-        bPuntuacions.setText("VER PUNTUACIÓNS");
-        bPuntuacions.addActionListener(new java.awt.event.ActionListener() {
+        bVerPuntuacions.setBackground(new java.awt.Color(102, 204, 255));
+        bVerPuntuacions.setFont(new java.awt.Font("Reem Kufi", 0, 24)); // NOI18N
+        bVerPuntuacions.setForeground(new java.awt.Color(102, 0, 102));
+        bVerPuntuacions.setText("VER PUNTUACIÓNS");
+        bVerPuntuacions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bPuntuacionsActionPerformed(evt);
+                bVerPuntuacionsActionPerformed(evt);
             }
         });
 
@@ -567,7 +570,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(tituloSerpe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bModoXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bPuntuacions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bVerPuntuacions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bSairXogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(443, 443, 443))
         );
@@ -581,7 +584,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(bModoXogo)
                 .addGap(50, 50, 50)
-                .addComponent(bPuntuacions)
+                .addComponent(bVerPuntuacions)
                 .addGap(50, 50, 50)
                 .addComponent(bSairXogo)
                 .addContainerGap(221, Short.MAX_VALUE))
@@ -905,11 +908,11 @@ public class Interface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "JUGADOR", "PUNTUACIÓN", "FROITAS", "BOMBAS", "TEMPO", "DATA"
+                "JUGADOR", "PUNTUACIÓN", "FROITAS", "BOMBAS", "TEMPO", "DATA", "MODO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -928,6 +931,7 @@ public class Interface extends javax.swing.JFrame {
             jTablePuntuacions.getColumnModel().getColumn(2).setResizable(false);
             jTablePuntuacions.getColumnModel().getColumn(3).setResizable(false);
             jTablePuntuacions.getColumnModel().getColumn(5).setResizable(false);
+            jTablePuntuacions.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout panelPuntuacionsLayout = new javax.swing.GroupLayout(panelPuntuacions);
@@ -1092,7 +1096,7 @@ public class Interface extends javax.swing.JFrame {
         contrasinalNovo.setText("");
     }//GEN-LAST:event_bConfirmarRegistrarseActionPerformed
 
-    private void bPuntuacionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPuntuacionsActionPerformed
+    private void bVerPuntuacionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerPuntuacionsActionPerformed
         pantallaInicial.setVisible(false);
         panelPuntuacions.setVisible(true);
         DefaultTableModel tablaPuntuacions = (DefaultTableModel) jTablePuntuacions.getModel();
@@ -1105,7 +1109,7 @@ public class Interface extends javax.swing.JFrame {
             tablaPuntuacions.addRow((Object[]) iterPartidas.next());
         }
         jTablePuntuacions.setModel(tablaPuntuacions);
-    }//GEN-LAST:event_bPuntuacionsActionPerformed
+    }//GEN-LAST:event_bVerPuntuacionsActionPerformed
 
     private void bSairXogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairXogoActionPerformed
         System.exit(0);
@@ -1159,6 +1163,10 @@ public class Interface extends javax.swing.JFrame {
         despausar();
     }
     
+    /**
+     * Cando finaliza o Xogo móstrase o panelFinXogo cos botóns para gardar puntuacións, 
+     * para empezar unha nova partida e para volver ao panel principal.
+     */
     public void finDoXogo(){
         panelFinXogo.setVisible(true);
         pausar();
@@ -1171,7 +1179,7 @@ public class Interface extends javax.swing.JFrame {
     private void pausar(){
         bPausa.setSelected(true);
         bPausa.setText("START");
-        timer.stop();
+        timerVelocidade.stop();
         tempoXogo.stop();
         panelXogo.requestFocus();
     }
@@ -1179,7 +1187,7 @@ public class Interface extends javax.swing.JFrame {
     private void despausar(){
         bPausa.setSelected(false);
         bPausa.setText("PAUSE");
-        timer.restart();
+        timerVelocidade.restart();
         tempoXogo.restart();
         panelXogo.requestFocus();
     }
@@ -1197,8 +1205,8 @@ public class Interface extends javax.swing.JFrame {
     
     /**
      * Pinta no panelXogo a label do cadrado que lle pasan
-     * e pon a label da imaxe por debaixo dos demais componentes do panel.
-     * @param cadrado 
+     * e pon a label da imaxe do taboleiro por debaixo dos demais compoñentes do panel.
+     * @param cadrado cadrado que se quere pintar no panel
      */
     public void pintarCadrado(Cadrado cadrado){
         panelXogo.add(cadrado.getLblCadrado());
@@ -1206,6 +1214,10 @@ public class Interface extends javax.swing.JFrame {
         panelXogo.setComponentZOrder(imagen, panelXogo.getComponentCount()-1);
     }
     
+    /**
+     * Borra do panelXogo a label do cadrado que lle pasan.
+     * @param cadrado cadrado que se quere borrar do panel
+     */
     public void borrarCadrado(Cadrado cadrado){
         panelXogo.remove(cadrado.getLblCadrado());
         panelXogo.updateUI();
@@ -1227,7 +1239,7 @@ public class Interface extends javax.swing.JFrame {
     }
     
     private void crearTimerVelocidade(){
-        timer=new Timer(xogo.getVelocidade(), new ActionListener() {
+        timerVelocidade=new Timer(xogo.getSerpe().getVelocidade(), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 xogo.avanzarSerpe();
@@ -1236,18 +1248,34 @@ public class Interface extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Establece o delay do timerVelocidade como a velocidade pasada.
+     * @param velocidade velocidade desta Serpe
+     */
     public void modificarTimerVelocidade(int velocidade){
-        timer.setDelay(velocidade);
+        timerVelocidade.setDelay(velocidade);
     }
     
+    /**
+     * Establece na label froitasComidas do panel menu as foitas que lle pasan.
+     * @param froitas froitas comidas neste Xogo
+     */
     public void engadirFroitas(int froitas){
         froitasComidas.setText(froitas+"");
     }
     
+    /**
+     * Establece na label bombasComidas do panel menu as bombas que lle pasan.
+     * @param bombas bombas comidas neste Xogo
+     */
     public void engadirBombas(int bombas){
         bombasComidas.setText(bombas+"");
     }
     
+    /**
+     * Establece na label puntosObtidos do panel menu os puntos que lle pasan.
+     * @param puntos puntos obtidos neste Xogo
+     */
     public void establecerPuntos(int puntos){
         puntosObtidos.setText(puntos+"");
     }
@@ -1257,6 +1285,10 @@ public class Interface extends javax.swing.JFrame {
         xogo.setTempo(tempoXogo);
     }
     
+    /**
+     * Establece a imaxe da Cabeza da Serpe como o icono co que aparecerá o JFrame ao executar este programa.
+     * @return A imaxe do icono
+     */
     @Override
     public Image getIconImage(){
         Image retValue = null;
@@ -1266,8 +1298,12 @@ public class Interface extends javax.swing.JFrame {
         return retValue;
     }
     
+    /**
+     * Deshabilita os botóns relacionados coa base de datos, facendoos invisibles, 
+     * cando non se pode acceder a base de datos.
+     */
     public void bloquearBD(){
-        bPuntuacions.setVisible(false);
+        bVerPuntuacions.setVisible(false);
         bGardarPuntuacion.setVisible(false);
     }
 
@@ -1284,9 +1320,9 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton bNovaPartida;
     private javax.swing.JButton bPantallaInicial;
     private javax.swing.JToggleButton bPausa;
-    private javax.swing.JButton bPuntuacions;
     private javax.swing.JButton bRegistrarse;
     private javax.swing.JButton bSairXogo;
+    private javax.swing.JButton bVerPuntuacions;
     private javax.swing.JButton bVolverInicio;
     private javax.swing.JLabel bombasComidas;
     private javax.swing.JPasswordField contrasinal;

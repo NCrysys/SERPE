@@ -174,7 +174,8 @@ public class ConexionBaseDatos {
                 int bombas = mysqlResult.getInt(4);
                 int tempo = mysqlResult.getInt(5);
                 Date fecha = mysqlResult.getDate(6);
-                Partida partida = new Partida(jugador, puntuacion, froitas, bombas, tempo, fecha);
+                String modo = mysqlResult.getString(7);
+                Partida partida = new Partida(jugador, puntuacion, froitas, bombas, tempo, fecha, modo);
                 partidas.add(partida.getPartida());
             }
         } catch (SQLException e) {

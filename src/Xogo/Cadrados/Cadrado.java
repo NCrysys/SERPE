@@ -4,7 +4,6 @@
  */
 package Xogo.Cadrados;
 
-import java.awt.Color;
 import javax.swing.JLabel;
 
 /**
@@ -45,7 +44,7 @@ public abstract class Cadrado implements Coloreable{
     
     //MÉTODOS
     /**
-     * Establece a posición do cadrado.
+     * Establece a posición deste cadrado.
      */
     protected abstract void establecerPosicion();
 }

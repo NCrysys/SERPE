@@ -779,7 +779,7 @@
                       <Component id="tituloSerpe" alignment="2" max="32767" attributes="0"/>
                       <Component id="bIniciar" alignment="2" max="32767" attributes="0"/>
                       <Component id="bModoXogo" alignment="2" max="32767" attributes="0"/>
-                      <Component id="bPuntuacions" alignment="2" max="32767" attributes="0"/>
+                      <Component id="bVerPuntuacions" alignment="2" max="32767" attributes="0"/>
                       <Component id="bSairXogo" alignment="2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="443" max="-2" attributes="0"/>
@@ -796,7 +796,7 @@
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="bModoXogo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="bPuntuacions" min="-2" max="-2" attributes="0"/>
+                  <Component id="bVerPuntuacions" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="bSairXogo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="221" max="32767" attributes="0"/>
@@ -854,7 +854,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bModoXogoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bPuntuacions">
+        <Component class="javax.swing.JButton" name="bVerPuntuacions">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="66" type="rgb"/>
@@ -868,7 +868,7 @@
             <Property name="text" type="java.lang.String" value="VER PUNTUACI&#xd3;NS"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bPuntuacionsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bVerPuntuacionsActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bSairXogo">
@@ -1534,13 +1534,14 @@
                   <Color blue="cc" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="0">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="JUGADOR" type="java.lang.Object"/>
                     <Column editable="false" title="PUNTUACI&#xd3;N" type="java.lang.Object"/>
                     <Column editable="false" title="FROITAS" type="java.lang.Object"/>
                     <Column editable="false" title="BOMBAS" type="java.lang.Object"/>
                     <Column editable="false" title="TEMPO" type="java.lang.Object"/>
                     <Column editable="false" title="DATA" type="java.lang.Object"/>
+                    <Column editable="false" title="MODO" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1566,6 +1567,11 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
