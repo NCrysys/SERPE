@@ -51,20 +51,13 @@ public class ConexionBaseDatos {
      * @param froitas número de froitas comidas nesta partida
      * @param bombas número de bombas comidas nesta partida
      * @param tempo tempo de xogo desta partida
-     * @param modoClasico modo de xogo desta partida, true clasico, false esfera
+     * @param modo modo de xogo desta partida
      * @return true se estes datos se gardaron con éxito, false se estes datos non se puideron gardar
      */
-    public boolean gardarDatos(String usuario, int puntos, int froitas, int bombas, int tempo, boolean modoClasico){
+    public boolean gardarDatos(String usuario, int puntos, int froitas, int bombas, int tempo, String modo){
         boolean gardado=false;
         try {
             int idJugador=obterIdJugador(usuario);
-            String modo;
-            if (modoClasico){
-                modo="Clásico";
-            }
-            else{
-                modo="Esfera";
-            }
             Statement insertPartida = null;
             String insertString = "INSERT INTO PARTIDAS VALUES (NULL, '"+idJugador+"', '"+puntos+"', '"+froitas+"', '"+bombas+"', '"+tempo+"', CURRENT_DATE(), '"+modo+"')";
             insertPartida = con.createStatement();
